@@ -1,10 +1,12 @@
 ﻿#pragma strict
+import UnityEngine.SceneManagement;
 
 var RedCircle: GameObject;
 var GreenCircle: GameObject;
 var YellowCircle: GameObject;
 var BlueCircle: GameObject;
 var lastTime: float = 0;
+var score: float = 0;
 
 function Start() {
 
@@ -36,3 +38,16 @@ function pickColor() {
     } 
 
 }
+
+function addPoints() {
+	score += 10;
+	print(score);
+
+}
+
+function minusPoints() {
+	score -= 5;
+	print(score);
+
+}
+
