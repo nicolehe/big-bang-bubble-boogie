@@ -1,4 +1,5 @@
 ﻿#pragma strict
+import UnityEngine.SceneManagement;
 
 var createdTime: float = 0;
 var button: KeyCode;
