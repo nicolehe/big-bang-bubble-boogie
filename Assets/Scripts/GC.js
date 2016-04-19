@@ -7,6 +7,8 @@ var YellowCircle: GameObject;
 var BlueCircle: GameObject;
 var lastTime: float = 0;
 
+//hello ian test!!!
+
 
 function Start() {
 
