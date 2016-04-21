@@ -30,11 +30,19 @@ function Update() {
     }
 }
 
+
+//Figure out how to make score register correctly
+
 function scoring() {
     //if the user presses the correct button and it has not been hit yet, add points, then say that the button was hit
     if (Input.GetKey(button) && goodHit == false) {
         GameObject.Find("ScoreText").BroadcastMessage("addPoints");
         goodHit = !goodHit;
+
+        //TURN GREY/FADE OUT IF THIS BUTTON HAS BEEN PUSHED BUT NOT ALL THIS ROUND HAVE
+
+        //DESTROY CIRCLE IF ALL BUTTONS FOR THIS ROUND HAVE BEEN PUSHED & CHANGE THE WAY TIME IS HANDLED IN GC
+
     }
     //if the user hits any other button and no button has been hit yet, minus points and say the wrong button was hit
     if (Input.anyKey == true && goodHit == false && badHit == false) {
