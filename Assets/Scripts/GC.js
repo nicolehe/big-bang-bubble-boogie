@@ -45,21 +45,12 @@ function Update() {
 
     var counting = Time.timeSinceLevelLoad - lastTime;
 
-//adjust current level based on timeBetweenLevels variable
-    if(Time.timeSinceLevelLoad <= timeBetweenLevels) {
-    	level = 1;
-    } else if(Time.timeSinceLevelLoad > timeBetweenLevels && Time.timeSinceLevelLoad <= (timeBetweenLevels * 2)) {
-    	level = 2;
+    if (level == 1) {
+        music.pitch = 1;
+    } else if (level == 2) {
         music.pitch = 1.1;
-        GameObject.Find("LevelText").BroadcastMessage("nextLevel", 2);
-        GameObject.Find("SpaceMermaid").BroadcastMessage("nextLevel", 2);
-        GameObject.Find("Astrocrab").BroadcastMessage("nextLevel", 2);
-    } else {
-    	level = 3;
+    } else if (level == 3) {
         music.pitch = 1.2;
-        GameObject.Find("LevelText").BroadcastMessage("nextLevel", 3);
-        GameObject.Find("SpaceMermaid").BroadcastMessage("nextLevel", 3);
-        GameObject.Find("Astrocrab").BroadcastMessage("nextLevel", 3);
     }
 
 //call function to instantiate circles at interval set by timeToReact variable
@@ -68,6 +59,11 @@ function Update() {
         lastTime = Time.timeSinceLevelLoad;
     }
  }
+
+ function currentLevel(currentLevel : int) {
+    level = currentLevel;
+}
+
 
 //display circles according to level passed in from update function
 function displayCircles(lvl) {

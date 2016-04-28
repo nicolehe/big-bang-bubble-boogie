@@ -18,6 +18,6 @@ function Update() {
     text.text = "Level:" + level;
 }
 
-function nextLevel(nextLevel : int) {
-	level = nextLevel;
+function currentLevel(currentLevel : int) {
+	level = currentLevel;
 }
