@@ -19,7 +19,7 @@ TO ADD A NEW LEVEL BY INSTANTIATING ONE MORE CIRCLE THAN BEFORE:
 var RedCircle: GameObject;
 var GreenCircle: GameObject;
 var YellowCircle: GameObject;
-var BlueCircle: GameObject;
+var WhiteCircle: GameObject;
 
 var colors = ['red', 'green', 'blue', 'yellow'];
 var colorPick: String;
@@ -88,8 +88,8 @@ function pickColor() : GameObject {
     	return GreenCircle;
     } else if(colorPick == 'red') {
     	return RedCircle;
-    } else if(colorPick == 'blue') {
-    	return BlueCircle;
+    } else if(colorPick == 'white') {
+    	return WhiteCircle;
     } else if(colorPick == 'yellow') {
     	return YellowCircle;
     }

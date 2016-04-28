@@ -17,6 +17,6 @@ function Update() {
 	anim.speed = level * 0.6;
 }
 
-function nextLevel(nextLevel : int) {
-	level = nextLevel;
+function nextLevel(currentLevel : int) {
+	level = currentLevel;
 }
