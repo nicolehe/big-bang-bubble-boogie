@@ -46,6 +46,9 @@ function addPoints() {
     score += 10;
     print(score);
     Instantiate(great, Vector3(0, 0, 0), Quaternion.identity);
+    if (claps.isPlaying) {
+        claps.Stop();
+    }
     claps.Play();
 }
 
@@ -53,6 +56,9 @@ function minusPoints() {
     score -= 5;
     print(score);
     Instantiate(boo, Vector3(0, 0, 0), Quaternion.identity);
+    if (frowns.isPlaying) {
+        frowns.Stop();
+    }
     frowns.Play();
 
 }
