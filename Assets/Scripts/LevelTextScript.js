@@ -15,7 +15,7 @@ function Awake() {
 
 
 function Update() {
-    text.text = "Level: " + level;
+    text.text = "Level:" + level;
 }
 
 function nextLevel(nextLevel : int) {
