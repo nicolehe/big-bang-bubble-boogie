@@ -1,6 +1,7 @@
 ﻿#pragma strict
 import UnityEngine.SceneManagement;
 
+
 var createdTime: float = 0;
 var button: KeyCode;
 var goodHit: boolean = false; //whether the right button has been hit

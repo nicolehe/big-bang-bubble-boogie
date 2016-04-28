@@ -1,6 +1,7 @@
 ﻿#pragma strict
 import UnityEngine.SceneManagement;
 
+
 /*
 TO ADD A NEW LEVEL BY INSTANTIATING ONE MORE CIRCLE THAN BEFORE:
 
@@ -27,6 +28,8 @@ var lastTime: float = 0;
 var level: int = 0;
 
 
+
+
 //change this variable to make levels shorter or longer, in seconds
 var timeBetweenLevels = 20;
 
@@ -46,8 +49,10 @@ function Update() {
     	level = 1;
     } else if(Time.timeSinceLevelLoad > timeBetweenLevels && Time.timeSinceLevelLoad <= (timeBetweenLevels * 2)) {
     	level = 2;
+        GameObject.Find("LevelText").BroadcastMessage("nextLevel", 2);
     } else {
     	level = 3;
+        GameObject.Find("LevelText").BroadcastMessage("nextLevel", 3);
     }
 
 //call function to instantiate circles at interval set by timeToReact variable
