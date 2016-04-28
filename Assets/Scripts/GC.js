@@ -1,5 +1,6 @@
 ﻿#pragma strict
 import UnityEngine.SceneManagement;
+var music: AudioSource;
 
 
 /*
@@ -37,7 +38,7 @@ var timeBetweenLevels = 20;
 var timeToReact = 5;
 
 function Start() {
-
+    music.pitch = 1;
 }
 
 function Update() {
@@ -49,11 +50,13 @@ function Update() {
     	level = 1;
     } else if(Time.timeSinceLevelLoad > timeBetweenLevels && Time.timeSinceLevelLoad <= (timeBetweenLevels * 2)) {
     	level = 2;
+        music.pitch = 1.1;
         GameObject.Find("LevelText").BroadcastMessage("nextLevel", 2);
         GameObject.Find("SpaceMermaid").BroadcastMessage("nextLevel", 2);
         GameObject.Find("Astrocrab").BroadcastMessage("nextLevel", 2);
     } else {
     	level = 3;
+        music.pitch = 1.2;
         GameObject.Find("LevelText").BroadcastMessage("nextLevel", 3);
         GameObject.Find("SpaceMermaid").BroadcastMessage("nextLevel", 3);
         GameObject.Find("Astrocrab").BroadcastMessage("nextLevel", 3);

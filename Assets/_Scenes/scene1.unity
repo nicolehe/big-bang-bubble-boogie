@@ -735,6 +735,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1164138140}
   - 114: {fileID: 1164138139}
+  - 82: {fileID: 1164138141}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -753,6 +754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe50c3c44db8b44ada044b07106a3012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  music: {fileID: 1164138141}
   RedCircle: {fileID: 145288, guid: f6787ed8acf4841989b36c15a3e461f2, type: 2}
   GreenCircle: {fileID: 161520, guid: 97662a8e3747c41f181fe621d68aaf95, type: 2}
   YellowCircle: {fileID: 196392, guid: e1c7d812692ea4eca918a7aadd201e12, type: 2}
@@ -780,28 +782,12 @@ Transform:
   - {fileID: 1163434280}
   m_Father: {fileID: 0}
   m_RootOrder: 1
---- !u!1 &1234000214
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1234000216}
-  - 82: {fileID: 1234000215}
-  m_Layer: 0
-  m_Name: Music
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!82 &1234000215
+--- !u!82 &1164138141
 AudioSource:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1234000214}
+  m_GameObject: {fileID: 1164138138}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -870,18 +856,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!4 &1234000216
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1234000214}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.1800003, y: -1.3499999, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
 --- !u!1 &2076580532
 GameObject:
   m_ObjectHideFlags: 0
