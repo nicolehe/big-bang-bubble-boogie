@@ -1,6 +1,4 @@
-﻿//added code for testing. Paula. 
-
-#pragma strict
+﻿#pragma strict
 import UnityEngine.SceneManagement;
 
 var createdTime: float = 0;
