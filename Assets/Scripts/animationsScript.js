@@ -1,18 +1,22 @@
 ﻿#pragma strict
 import UnityEngine.SceneManagement;
 
-var anim: Animation;
-
+var anim: Animator;
+var level = 1;
 
 
 function Start() {
-    anim = GetComponent. < Animation > ();
+    anim = GetComponent. < Animator > ();
 
-    for (var state: AnimationState in anim) {
-        state.speed = 0.1;
-    }
+    anim.speed = 1;
+
 }
 
-function Update() {
 
+function Update() {
+	anim.speed = level * 0.8;
+}
+
+function nextLevel(nextLevel : int) {
+	level = nextLevel;
 }

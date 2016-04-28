@@ -50,9 +50,13 @@ function Update() {
     } else if(Time.timeSinceLevelLoad > timeBetweenLevels && Time.timeSinceLevelLoad <= (timeBetweenLevels * 2)) {
     	level = 2;
         GameObject.Find("LevelText").BroadcastMessage("nextLevel", 2);
+        GameObject.Find("SpaceMermaid").BroadcastMessage("nextLevel", 2);
+        GameObject.Find("Astrocrab").BroadcastMessage("nextLevel", 2);
     } else {
     	level = 3;
         GameObject.Find("LevelText").BroadcastMessage("nextLevel", 3);
+        GameObject.Find("SpaceMermaid").BroadcastMessage("nextLevel", 3);
+        GameObject.Find("Astrocrab").BroadcastMessage("nextLevel", 3);
     }
 
 //call function to instantiate circles at interval set by timeToReact variable
