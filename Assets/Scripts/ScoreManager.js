@@ -4,6 +4,8 @@ static var score: int; // The player's score.
 private var text: UnityEngine.UI.Text; // Reference to the Text component.
 
 var boo: GameObject;
+var claps: ParticleSystem;
+var frowns: ParticleSystem;
 var great: GameObject;
 
 
@@ -44,12 +46,13 @@ function addPoints() {
     score += 10;
     print(score);
     Instantiate(great, Vector3(0, 0, 0), Quaternion.identity);
-
+    claps.Play();
 }
 
 function minusPoints() {
     score -= 5;
     print(score);
     Instantiate(boo, Vector3(0, 0, 0), Quaternion.identity);
+    frowns.Play();
 
 }

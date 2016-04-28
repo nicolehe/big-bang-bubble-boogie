@@ -21,7 +21,7 @@ var GreenCircle: GameObject;
 var YellowCircle: GameObject;
 var WhiteCircle: GameObject;
 
-var colors = ['red', 'green', 'blue', 'yellow'];
+var colors = ['red', 'green', 'white', 'yellow'];
 var colorPick: String;
 
 var lastTime: float = 0;
