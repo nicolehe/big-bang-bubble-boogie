@@ -22,14 +22,21 @@ var YellowCircle: GameObject;
 var WhiteCircle: GameObject;
 
 var colors = ['red', 'green', 'white', 'yellow'];
+var colorsOnScreen : Array;
 var colorPick: String;
 
 var lastTime: float = 0;
 
 var level: int = 0;
+var circleOnScreen: int = 0;
 
+var circle1 : GameObject;
+var circle2 : GameObject;
+var circle3 : GameObject;
 
-
+var circleInfo1 : Array;
+var circleInfo2 : Array;
+var circleInfo3 : Array;
 
 //change this variable to make levels shorter or longer, in seconds
 var timeBetweenLevels = 20;
@@ -39,6 +46,7 @@ var timeToReact = 5;
 
 function Start() {
     music.pitch = 1;
+    colorsOnScreen = new Array();
 }
 
 function Update() {
@@ -58,6 +66,11 @@ function Update() {
         displayCircles(level);
         lastTime = Time.timeSinceLevelLoad;
     }
+
+
+    if (Input.anyKey == true && circleOnScreen == 0) {
+        GameObject.Find("ScoreText").BroadcastMessage("minusPoints");
+    }
  }
 
  function currentLevel(currentLevel : int) {
@@ -67,30 +80,55 @@ function Update() {
 
 //display circles according to level passed in from update function
 function displayCircles(lvl) {
+
 	if(lvl == 1) {
-		Instantiate(pickColor(), Vector3(0, 3, 0), Quaternion.identity);
+         circleInfo1 = pickColor();
+		circle1 = Instantiate(circleInfo1[0], Vector3(0, 3, 0), Quaternion.identity);
+        circle1.BroadcastMessage("CircleColor", circleInfo1[1]);
+        
+        circleOnScreen += 1;
 	} else if(lvl == 2) {
-		Instantiate(pickColor(), Vector3(-2, 3, 0), Quaternion.identity);
-		Instantiate(pickColor(), Vector3(2, 3, 0), Quaternion.identity);
+         circleInfo1 = pickColor();
+         circleInfo2 = pickColor();
+
+		 circle1 = Instantiate(circleInfo1[0], Vector3(-2, 3, 0), Quaternion.identity);
+		 circle2 = Instantiate(circleInfo2[0], Vector3(2, 3, 0), Quaternion.identity);
+
+        circle1.BroadcastMessage("CircleColor", circleInfo1[1]);
+        circle2.BroadcastMessage("CircleColor", circleInfo2[1]);
+
+        circleOnScreen += 2;
 	} else if(lvl == 3) {
-		Instantiate(pickColor(), Vector3(-4, 3, 0), Quaternion.identity);
-		Instantiate(pickColor(), Vector3(0, 3, 0), Quaternion.identity);
-		Instantiate(pickColor(), Vector3(4, 3, 0), Quaternion.identity);
+         circleInfo1 = pickColor();
+         circleInfo2 = pickColor();
+         circleInfo3 = pickColor();
+        
+		 circle1 = Instantiate(circleInfo1[0], Vector3(-4, 3, 0), Quaternion.identity);
+		 circle2 = Instantiate(circleInfo2[0], Vector3(0, 3, 0), Quaternion.identity);
+		 circle3 = Instantiate(circleInfo3[0], Vector3(4, 3, 0), Quaternion.identity);
+
+        circle1.BroadcastMessage("CircleColor", circleInfo1[1]);
+        circle2.BroadcastMessage("CircleColor", circleInfo2[1]);
+        circle3.BroadcastMessage("CircleColor", circleInfo3[1]);
+        
+
+        circleOnScreen += 3;
 	}
 }
 
 //choose a random color and return the one selected every time this function is called from displayCircles
-function pickColor() : GameObject {
+function pickColor() : Array {
 
 	var colorPick = colors[Random.Range(0, colors.length)];
+    colorsOnScreen.Push(colorPick);
 
     if (colorPick == 'green') {
-    	return GreenCircle;
+    	return [GreenCircle, 'green'];
     } else if(colorPick == 'red') {
-    	return RedCircle;
+    	return [RedCircle, 'red'];
     } else if(colorPick == 'white') {
-    	return WhiteCircle;
+    	return [WhiteCircle, 'white'];
     } else if(colorPick == 'yellow') {
-    	return YellowCircle;
+    	return [YellowCircle, 'yellow'];
     }
 }

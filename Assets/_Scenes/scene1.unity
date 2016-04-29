@@ -885,6 +885,10 @@ MonoBehaviour:
   colorPick: 
   lastTime: 0
   level: 0
+  circleOnScreen: 0
+  circle1: {fileID: 0}
+  circle2: {fileID: 0}
+  circle3: {fileID: 0}
   timeBetweenLevels: 20
   timeToReact: 5
 --- !u!4 &1164138140

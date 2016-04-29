@@ -22,19 +22,19 @@ function Awake() {
 function Update() {
     text.text = "Score: " + score;
  if (score < 30) {
-        print("level 1");
+        //print("level 1");
         GameObject.Find("GameController").BroadcastMessage("currentLevel", 1);
         GameObject.Find("LevelText").BroadcastMessage("currentLevel", 1);
         GameObject.Find("SpaceMermaid").BroadcastMessage("currentLevel", 1);
         GameObject.Find("Astrocrab").BroadcastMessage("currentLevel", 1);
     } else if (score >= 30) {
-        print("level 2");
+        //print("level 2");
         GameObject.Find("GameController").BroadcastMessage("currentLevel", 2);
         GameObject.Find("LevelText").BroadcastMessage("currentLevel", 2);
         GameObject.Find("SpaceMermaid").BroadcastMessage("currentLevel", 2);
         GameObject.Find("Astrocrab").BroadcastMessage("currentLevel", 2);
     } else if (score >= 70) {
-        print("level 3");
+        //print("level 3");
         GameObject.Find("GameController").BroadcastMessage("currentLevel", 3);
         GameObject.Find("LevelText").BroadcastMessage("currentLevel", 3);
         GameObject.Find("SpaceMermaid").BroadcastMessage("currentLevel", 3);
@@ -42,8 +42,8 @@ function Update() {
     } 
 }
 
-function addPoints() {
-    score += 10;
+function addPoints(counting : float) {
+    score += Mathf.Floor(8 / counting);
     print(score);
     Instantiate(great, Vector3(0, 0, 0), Quaternion.identity);
     if (claps.isPlaying) {
