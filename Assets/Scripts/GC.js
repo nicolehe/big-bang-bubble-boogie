@@ -3,19 +3,6 @@ import UnityEngine.SceneManagement;
 var music: AudioSource;
 
 
-/*
-TO ADD A NEW LEVEL BY INSTANTIATING ONE MORE CIRCLE THAN BEFORE:
-
-1) In update function: 
-	a) Add an if statement to the final else to reflect the time range you'd like that level to represent
-	b) Add an additional else statement and set level to next higest integer
-2) In displayCircles function:
-	a) Add a new else if statement to check for when lvl is equal to the integer created in 2b
-	b) Add lines instantiating circles a number of times equal to this integer. The values in each Vector3 need to be changed by hand
-3) PARTY
-*/
-
-
 var RedCircle: GameObject;
 var GreenCircle: GameObject;
 var YellowCircle: GameObject;
@@ -24,11 +11,19 @@ var WhiteCircle: GameObject;
 var colors = ['red', 'green', 'white', 'yellow'];
 var colorsOnScreen : Array;
 var colorPick: String;
+var correctButtons: Array;
+
+var createdTime: float = 0;
+var timeActive: float = 0;
 
 var lastTime: float = 0;
 
+var match : boolean = false;
+
 var level: int = 0;
 var circleOnScreen: int = 0;
+
+var thisKey : String;
 
 var circle1 : GameObject;
 var circle2 : GameObject;
@@ -38,6 +33,8 @@ var circleInfo1 : Array;
 var circleInfo2 : Array;
 var circleInfo3 : Array;
 
+var counting: float;
+
 //change this variable to make levels shorter or longer, in seconds
 var timeBetweenLevels = 20;
 
@@ -46,12 +43,24 @@ var timeToReact = 5;
 
 function Start() {
     music.pitch = 1;
+
+    //create arrays for which color circles are on screen and which buttons correspond to them
     colorsOnScreen = new Array();
+    correctButtons = new Array();
 }
 
 function Update() {
 
-    var counting = Time.timeSinceLevelLoad - lastTime;
+    counting = Time.timeSinceLevelLoad - lastTime;
+
+    //if 3 sec. have passed and players have not gotten all button presses correct yet, set number of circles on screen to 0 and subtract points for each circle remaining
+    if(counting > 3 && circleOnScreen != 0){
+
+    	for(var i = 0; i < circleOnScreen; i++){
+    		GameObject.Find("ScoreText").BroadcastMessage("minusPoints");
+    	}
+    	circleOnScreen = 0;
+    }
 
     if (level == 1) {
         music.pitch = 1;
@@ -61,15 +70,15 @@ function Update() {
         music.pitch = 1.2;
     }
 
-//call function to instantiate circles at interval set by timeToReact variable
+	//call function to instantiate circles at interval set by timeToReact variable
     if (counting > timeToReact) {
         displayCircles(level);
         lastTime = Time.timeSinceLevelLoad;
     }
 
-
-    if (Input.anyKey == true && circleOnScreen == 0) {
-        GameObject.Find("ScoreText").BroadcastMessage("minusPoints");
+    //if there are circles on screen, check for button presses
+    if(circleOnScreen > 0){
+    	keyCheck();
     }
  }
 
@@ -81,54 +90,73 @@ function Update() {
 //display circles according to level passed in from update function
 function displayCircles(lvl) {
 
+	//The next three lines are a safety net. They should all clear naturally, but just in case everything will clear before adding new things
+	colorsOnScreen.Clear();
+	correctButtons.Clear();
+	circleOnScreen = 0;
+
+	//instantiate based on level
 	if(lvl == 1) {
-         circleInfo1 = pickColor();
-		circle1 = Instantiate(circleInfo1[0], Vector3(0, 3, 0), Quaternion.identity);
-        circle1.BroadcastMessage("CircleColor", circleInfo1[1]);
+
+		circle1 = Instantiate(pickColor(), Vector3(0, 3, 0), Quaternion.identity);
         
-        circleOnScreen += 1;
 	} else if(lvl == 2) {
-         circleInfo1 = pickColor();
-         circleInfo2 = pickColor();
 
-		 circle1 = Instantiate(circleInfo1[0], Vector3(-2, 3, 0), Quaternion.identity);
-		 circle2 = Instantiate(circleInfo2[0], Vector3(2, 3, 0), Quaternion.identity);
+		 circle1 = Instantiate(pickColor(), Vector3(-2, 3, 0), Quaternion.identity);
+		 circle2 = Instantiate(pickColor(), Vector3(2, 3, 0), Quaternion.identity);
 
-        circle1.BroadcastMessage("CircleColor", circleInfo1[1]);
-        circle2.BroadcastMessage("CircleColor", circleInfo2[1]);
-
-        circleOnScreen += 2;
 	} else if(lvl == 3) {
-         circleInfo1 = pickColor();
-         circleInfo2 = pickColor();
-         circleInfo3 = pickColor();
         
-		 circle1 = Instantiate(circleInfo1[0], Vector3(-4, 3, 0), Quaternion.identity);
-		 circle2 = Instantiate(circleInfo2[0], Vector3(0, 3, 0), Quaternion.identity);
-		 circle3 = Instantiate(circleInfo3[0], Vector3(4, 3, 0), Quaternion.identity);
+		 circle1 = Instantiate(pickColor(), Vector3(-4, 3, 0), Quaternion.identity);
+		 circle2 = Instantiate(pickColor(), Vector3(0, 3, 0), Quaternion.identity);
+		 circle3 = Instantiate(pickColor(), Vector3(4, 3, 0), Quaternion.identity);       
 
-        circle1.BroadcastMessage("CircleColor", circleInfo1[1]);
-        circle2.BroadcastMessage("CircleColor", circleInfo2[1]);
-        circle3.BroadcastMessage("CircleColor", circleInfo3[1]);
-        
-
-        circleOnScreen += 3;
 	}
 }
 
 //choose a random color and return the one selected every time this function is called from displayCircles
-function pickColor() : Array {
+function pickColor() : GameObject {
 
 	var colorPick = colors[Random.Range(0, colors.length)];
+
     colorsOnScreen.Push(colorPick);
+    circleOnScreen += 1;
 
     if (colorPick == 'green') {
-    	return [GreenCircle, 'green'];
+    	correctButtons.Push('g');
+    	return GreenCircle;;
+
     } else if(colorPick == 'red') {
-    	return [RedCircle, 'red'];
+    	correctButtons.Push('r');
+    	return RedCircle;
+
     } else if(colorPick == 'white') {
-    	return [WhiteCircle, 'white'];
+    	correctButtons.Push('w');
+    	return WhiteCircle;
+
     } else if(colorPick == 'yellow') {
-    	return [YellowCircle, 'yellow'];
+    	correctButtons.Push('y');
+    	return YellowCircle;
     }
+}
+
+//called if user(s) press a button while circles are on screen
+function keyCheck() {
+	if(Input.anyKey) {
+
+		//when a key press happens, compare it to the ones in the correctButtons array
+		for(var i = 0; i < correctButtons.length; i++){
+			thisKey = correctButtons[i];
+
+			//if a match is found, add points, reduce circleOnScreen variable by 1, remove the corresponding key from the correctButtons array, and stop the entire keyCheck function
+			if(Input.GetKey(thisKey)){
+				GameObject.Find("ScoreText").BroadcastMessage("addPoints", counting);
+				circleOnScreen -= 1;
+				correctButtons.RemoveAt(i);
+				return;
+			}
+			//if the function gets here, that means there was no match among the correctButtons array. Subtract points for an incorrect press
+			GameObject.Find("ScoreText").BroadcastMessage("minusPoints");
+		}
+	}
 }

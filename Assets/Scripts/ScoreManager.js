@@ -44,7 +44,7 @@ function Update() {
 
 function addPoints(counting : float) {
     score += Mathf.Floor(8 / counting);
-    print(score);
+    //print(score);
     Instantiate(great, Vector3(0, 0, 0), Quaternion.identity);
     if (claps.isPlaying) {
         claps.Stop();
@@ -54,7 +54,7 @@ function addPoints(counting : float) {
 
 function minusPoints() {
     score -= 5;
-    print(score);
+    //print(score);
     Instantiate(boo, Vector3(0, 0, 0), Quaternion.identity);
     if (frowns.isPlaying) {
         frowns.Stop();
