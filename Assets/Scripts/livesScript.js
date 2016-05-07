@@ -13,6 +13,9 @@ function Start() {
 
 function Update() {
     text.text = "Lives: " + lives;
+    if (lives == 0){
+    	GameObject.Find("GameController").BroadcastMessage("gameOverFailed");
+    }
 }
 
 function loseLife() {

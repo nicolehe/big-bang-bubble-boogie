@@ -3,7 +3,8 @@ import UnityEngine.SceneManagement;
 var music: AudioSource;
 
 var highScore;
-
+public
+var keyCode: KeyCode;
 
 var RedCircle: GameObject;
 var GreenCircle: GameObject;
@@ -24,6 +25,7 @@ var yellows: Array;
 var greens: Array;
 var reds: Array;
 var whites: Array;
+var keyInputs: Array;
 
 var createdTime: float = 0;
 var timeActive: float = 0;
@@ -78,10 +80,15 @@ function Start() {
     greens = new Array();
     whites = new Array();
     bubbles = new Array();
+    keyInputs = new Array();
 
 }
 
 function Update() {
+    if (timesFailed < 0) {
+        timesFailed = 0;
+    }
+    keyCheck();
     // print(yellows);
     // print(greens);
     // print(whites);
@@ -129,18 +136,7 @@ function Update() {
 
 
 
-    //if 3 sec. have passed and players have not gotten all button presses correct yet, set number of circles on screen to 0 and subtract points for each circle remaining
-    if (counting > bubbleTime && circleOnScreen != 0) {
 
-        // for (var i = 0; i < circleOnScreen; i++) {
-        //     GameObject.Find("ScoreText").BroadcastMessage("minusPoints");
-        // }
-        timesFailed++;
-        circleOnScreen = 0;
-    }
-
-
-    //call function to instantiate circles at interval set by timeToReact variable
     if (counting > bubbleTime) {
         bubbleNum++;
         circle = GameObject.Instantiate(pickColor(), Vector3(Random.Range(-6.9, 6.9), -5, 0), Quaternion.identity);
@@ -158,38 +154,30 @@ function Update() {
             circle.name = "w" + bubbleNum;
             whites.Push(circle.name);
         }
-        //print(circle.name);
-        //circle.gameObject.name = "b" + bubbleNum;
         lastTime = Time.timeSinceLevelLoad;
-        //bubbles.Push(circle);
 
     }
 
-    //if there are circles on screen, check for button presses
-    if (circleOnScreen > 0) {
-        keyCheck();
-    } else {
-        if (Input.anyKeyDown) {
-            GameObject.Find("ScoreText").BroadcastMessage("minusPoints");
-        }
+
+
+    switch (timesFailed) {
+        case 0:
+            GameObject.Find("Audience").BroadcastMessage("happyFace");
+            break;
+        case 1:
+            GameObject.Find("Audience").BroadcastMessage("mehFace");
+            break;
+        case 2:
+            GameObject.Find("Audience").BroadcastMessage("badFace");
+            break;
+
     }
 
-    if (timesFailed == 0) {
-        GameObject.Find("Audience").BroadcastMessage("happyFace");
-    } else if (timesFailed == 1) {
-        GameObject.Find("Audience").BroadcastMessage("mehFace");
-    } else if (timesFailed == 2) {
-        GameObject.Find("Audience").BroadcastMessage("badFace");
-    } else if (timesFailed >= 3) {
-        gameOverFailed();
-    }
 }
 
 function currentLevel(currentLevel: int) {
     level = currentLevel;
 }
-
-
 
 
 //choose a random color and return the one selected every time this function is called from displayCircles
@@ -218,10 +206,29 @@ function pickColor(): GameObject {
     }
 }
 
+function audienceNeg() {
+    timesFailed++;
+}
+
+
+
 //called if user(s) press a button while circles are on screen
 function keyCheck() {
 
     if (Input.anyKeyDown) {
+        keyInputs = ["q", "w", "a", "s", "e", "d", "r", "f", "g", "t", "y", "h", "u", "j", "k", "i"];
+       var keyInput;
+
+        // for (var i = 0; i< keyInputs.length; i++) {
+        //     var thekey = keyInputs[i];
+
+        //     if (Input.GetKey(keyInputs[i])) {
+        //         print(i);
+        //     }
+        // }
+
+
+
         var key;
         if (Input.GetKey("q") || Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s")) {
             key = "w";
@@ -235,24 +242,29 @@ function keyCheck() {
 
         switch (key) {
             case "w":
-            print(whites.length);
+                var lastW;
+
+               
                 if (whites.length > 0) {
                     GameObject.Find("ScoreText").BroadcastMessage("addPoints", counting);
                     //pick random white bubble that still exists
                     var num = Random.Range(0, whites.length);
-                    GameObject.Find(whites[num]).BroadcastMessage("destroy");//.SendMessage("destroy");
+                    GameObject.Find(whites[num]).BroadcastMessage("destroy"); //.SendMessage("destroy");
                     whites.RemoveAt(num);
+                    timesFailed--;
 
                 } else {
                     GameObject.Find("Lives").BroadcastMessage("loseLife");
                 }
                 break;
             case "r":
+               
                 if (reds.length > 0) {
                     GameObject.Find("ScoreText").BroadcastMessage("addPoints", counting);
                     num = Random.Range(0, reds.length);
                     GameObject.Find(reds[num]).BroadcastMessage("destroy");
                     reds.RemoveAt(num);
+                    timesFailed--;
                 } else {
                     GameObject.Find("Lives").BroadcastMessage("loseLife");
                 }
@@ -262,8 +274,9 @@ function keyCheck() {
                     GameObject.Find("ScoreText").BroadcastMessage("addPoints", counting);
                     num = Random.Range(0, greens.length);
                     GameObject.Find(greens[num]).BroadcastMessage("destroy");
-                    whites.RemoveAt(num);
-                    
+                    greens.RemoveAt(num);
+                    timesFailed--;
+
 
                 } else {
                     GameObject.Find("Lives").BroadcastMessage("loseLife");
@@ -275,32 +288,14 @@ function keyCheck() {
                     num = Random.Range(0, yellows.length);
                     GameObject.Find(yellows[num]).BroadcastMessage("destroy");
                     yellows.RemoveAt(num);
-                    
+                    timesFailed--;
+
                 } else {
                     GameObject.Find("Lives").BroadcastMessage("loseLife");
                 }
                 break;
         }
 
-        // //when a key press happens, compare it to the ones in the correctButtons array
-        // for (var i = 0; i < correctButtons.length; i++) {
-        //     thisKey = correctButtons[i];
-        //     print("bubble" + (i + 1));
-        //     //if a match is found, add points, reduce circleOnScreen variable by 1, remove the corresponding key from the correctButtons array, and stop the entire keyCheck function
-        //     if (key == thisKey) {
-        //         GameObject.Find("ScoreText").BroadcastMessage("addPoints", counting);
-        //         gotOne++;
-        //         circleOnScreen -= 1;
-        //         correctButtons.RemoveAt(i);
-
-        //         GameObject.Find("bubble" + (i + 1)).BroadcastMessage("destroy");
-        //         bubbles.RemoveAt(i);
-        //         return;
-        //     }
-
-        // }
-        // //if the function gets here, that means there was no match among the correctButtons array. Subtract points for an incorrect press
-        // GameObject.Find("ScoreText").BroadcastMessage("minusPoints");
     }
 }
 

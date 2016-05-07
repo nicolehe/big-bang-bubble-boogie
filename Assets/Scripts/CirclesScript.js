@@ -13,6 +13,7 @@ function Start() {
 function Update() {
 	if(transform.position.y >= 6.2){
 		GameObject.Find("Lives").BroadcastMessage("loseLife");
+		GameObject.Find("GameController").BroadcastMessage("audienceNeg");
 		destroy();
 	}
 
