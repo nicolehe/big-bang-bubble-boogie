@@ -123,20 +123,6 @@ function Update() {
     }
 
 
-    // if (level == 1) {
-    //     music.pitch = 1;
-    // } else if (level == 2) {
-    //     music.pitch = 1.1;
-    // } else if (level == 3) {
-    //     music.pitch = 1.2;
-    // } else if (level == 4) {
-    //     music.pitch = 1.3;
-    // } else if (level == 5) {
-    //     music.pitch = 1.4;
-    // } else if (level == 6) {
-    //     music.pitch = 1.5;
-    // }
-
     //call function to instantiate circles at interval set by timeToReact variable
     if (counting > timeToReact) {
         displayCircles(level);

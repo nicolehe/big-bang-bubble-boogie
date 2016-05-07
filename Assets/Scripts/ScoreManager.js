@@ -35,42 +35,42 @@ function Update() {
         GameObject.Find("GameController").BroadcastMessage("gameOverFailed");
     }
     //print(Time.timeSinceLevelLoad);
-    if (score < 30 && Time.timeSinceLevelLoad < 5 && level1Done == false) {
+    if (score < 30 && Time.timeSinceLevelLoad < 20 && level1Done == false) {
         //print("level 1");
         GameObject.Find("GameController").BroadcastMessage("currentLevel", 1);
         GameObject.Find("LevelText").BroadcastMessage("currentLevel", 1);
         GameObject.Find("SpaceMermaid").BroadcastMessage("currentLevel", 1);
         GameObject.Find("Astrocrab").BroadcastMessage("currentLevel", 1);
         level1Done = true;
-    } else if (score >= 30 && level2Done == false || Time.timeSinceLevelLoad >= 10 && level2Done == false) {
+    } else if (score >= 30 && level2Done == false || Time.timeSinceLevelLoad >= 40 && level2Done == false) {
         //print("level 2");
         GameObject.Find("GameController").BroadcastMessage("currentLevel", 2);
         GameObject.Find("LevelText").BroadcastMessage("currentLevel", 2);
         GameObject.Find("SpaceMermaid").BroadcastMessage("currentLevel", 2);
         GameObject.Find("Astrocrab").BroadcastMessage("currentLevel", 2);
         level2Done = true;
-    } else if (score >= 70 && level3Done == false || Time.timeSinceLevelLoad >= 15 && level3Done == false) {
+    } else if (score >= 70 && level3Done == false || Time.timeSinceLevelLoad >= 60 && level3Done == false) {
         //print("level 3");
         GameObject.Find("GameController").BroadcastMessage("currentLevel", 3);
         GameObject.Find("LevelText").BroadcastMessage("currentLevel", 3);
         GameObject.Find("SpaceMermaid").BroadcastMessage("currentLevel", 3);
         GameObject.Find("Astrocrab").BroadcastMessage("currentLevel", 3);
         level3Done = true;
-    } else if (score >= 100 && level4Done == false || Time.timeSinceLevelLoad >= 20 && level4Done == false) {
+    } else if (score >= 100 && level4Done == false || Time.timeSinceLevelLoad >= 80 && level4Done == false) {
         //print("level 3");
         GameObject.Find("GameController").BroadcastMessage("currentLevel", 4);
         GameObject.Find("LevelText").BroadcastMessage("currentLevel", 4);
         GameObject.Find("SpaceMermaid").BroadcastMessage("currentLevel", 4);
         GameObject.Find("Astrocrab").BroadcastMessage("currentLevel", 4);
         level4Done = true;
-    } else if (score >= 130 && level5Done == false || Time.timeSinceLevelLoad >= 25 && level5Done == false) {
+    } else if (score >= 130 && level5Done == false || Time.timeSinceLevelLoad >= 100 && level5Done == false) {
         //print("level 3");
         GameObject.Find("GameController").BroadcastMessage("currentLevel", 5);
         GameObject.Find("LevelText").BroadcastMessage("currentLevel", 5);
         GameObject.Find("SpaceMermaid").BroadcastMessage("currentLevel", 5);
         GameObject.Find("Astrocrab").BroadcastMessage("currentLevel", 5);
         level5Done = true;
-    } else if (score >= 160 && level6Done == false || Time.timeSinceLevelLoad >= 50 && level6Done == false) {
+    } else if (score >= 160 && level6Done == false || Time.timeSinceLevelLoad >= 120 && level6Done == false) {
         //print("level 3");
         GameObject.Find("GameController").BroadcastMessage("currentLevel", 6);
         GameObject.Find("LevelText").BroadcastMessage("currentLevel", 6);

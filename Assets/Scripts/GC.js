@@ -65,6 +65,10 @@ var timeBetweenLevels = 20;
 
 //change this variable to give players more or less time to react, in seconds
 var timeToReact = 5;
+var lastW;
+var lastR;
+var lastG;
+var lastY;
 
 function Start() {
     Time.timeScale = 1;
@@ -85,6 +89,7 @@ function Start() {
 }
 
 function Update() {
+    print(lastW);
     if (timesFailed < 0) {
         timesFailed = 0;
     }
@@ -214,82 +219,85 @@ function audienceNeg() {
 
 //called if user(s) press a button while circles are on screen
 function keyCheck() {
-
+    //print(lastW);
     if (Input.anyKeyDown) {
         keyInputs = ["q", "w", "a", "s", "e", "d", "r", "f", "g", "t", "y", "h", "u", "j", "k", "i"];
-       var keyInput;
-
-        // for (var i = 0; i< keyInputs.length; i++) {
-        //     var thekey = keyInputs[i];
-
-        //     if (Input.GetKey(keyInputs[i])) {
-        //         print(i);
-        //     }
-        // }
+        var keyInput = Input.inputString;
 
 
 
         var key;
         if (Input.GetKey("q") || Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s")) {
+            //var lastW = keyInput;
             key = "w";
         } else if (Input.GetKey("e") || Input.GetKey("d") || Input.GetKey("r") || Input.GetKey("f")) {
+            //var lastR = keyInput;
             key = "r";
         } else if (Input.GetKey("g") || Input.GetKey("t") || Input.GetKey("y") || Input.GetKey("h")) {
+           // var lastG = keyInput;
             key = "g";
         } else if (Input.GetKey("u") || Input.GetKey("j") || Input.GetKey("k") || Input.GetKey("i")) {
+            //var lastY = keyInput;
             key = "y";
         }
 
+
         switch (key) {
             case "w":
-                var lastW;
 
-               
-                if (whites.length > 0) {
+                if (whites.length > 0 && keyInput != lastW) {
                     GameObject.Find("ScoreText").BroadcastMessage("addPoints", counting);
                     //pick random white bubble that still exists
                     var num = Random.Range(0, whites.length);
                     GameObject.Find(whites[num]).BroadcastMessage("destroy"); //.SendMessage("destroy");
                     whites.RemoveAt(num);
                     timesFailed--;
-
+                    lastW = keyInput;
+                } else if (whites.length > 0 && keyInput == lastW) {
+                    print("NOPE, gotta change W");
                 } else {
                     GameObject.Find("Lives").BroadcastMessage("loseLife");
                 }
                 break;
             case "r":
-               
-                if (reds.length > 0) {
+
+                if (reds.length > 0 && keyInput != lastR) {
                     GameObject.Find("ScoreText").BroadcastMessage("addPoints", counting);
                     num = Random.Range(0, reds.length);
                     GameObject.Find(reds[num]).BroadcastMessage("destroy");
                     reds.RemoveAt(num);
                     timesFailed--;
+                    lastR = keyInput;
+                } else if (reds.length > 0 && keyInput == lastR) {
+                    print("NOPE, gotta change R");
                 } else {
                     GameObject.Find("Lives").BroadcastMessage("loseLife");
                 }
                 break;
             case "g":
-                if (greens.length > 0) {
+                if (greens.length > 0 && keyInput != lastG) {
                     GameObject.Find("ScoreText").BroadcastMessage("addPoints", counting);
                     num = Random.Range(0, greens.length);
                     GameObject.Find(greens[num]).BroadcastMessage("destroy");
                     greens.RemoveAt(num);
                     timesFailed--;
-
-
+                    lastG = keyInput;
+                } else if (greens.length > 0 && keyInput == lastG) {
+                    print("NOPE, gotta change G");
                 } else {
                     GameObject.Find("Lives").BroadcastMessage("loseLife");
                 }
                 break;
             case "y":
-                if (yellows.length > 0) {
+                if (yellows.length > 0 && keyInput != lastY) {
                     GameObject.Find("ScoreText").BroadcastMessage("addPoints", counting);
                     num = Random.Range(0, yellows.length);
                     GameObject.Find(yellows[num]).BroadcastMessage("destroy");
                     yellows.RemoveAt(num);
                     timesFailed--;
-
+                    lastY = keyInput;
+                } else if (yellows.length > 0 && keyInput == lastY) {
+                    print("NOPE, gotta change Y");
                 } else {
                     GameObject.Find("Lives").BroadcastMessage("loseLife");
                 }
