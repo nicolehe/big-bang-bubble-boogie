@@ -549,7 +549,7 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
-    m_MaxSize: 40
+    m_MaxSize: 75
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -795,7 +795,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 762774493}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.62, y: -2.22, z: -0.54}
+  m_LocalPosition: {x: -5.62, y: -2.22, z: -0.57}
   m_LocalScale: {x: 0.06, y: 0.06, z: 0.06}
   m_Children: []
   m_Father: {fileID: 1706457609}
@@ -979,7 +979,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 884520157}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.32, y: -3.08, z: -4.3}
+  m_LocalPosition: {x: -6.32, y: -3.08, z: -0.82}
   m_LocalScale: {x: 0.07, y: 0.07, z: 1}
   m_Children: []
   m_Father: {fileID: 1706457609}
@@ -1059,6 +1059,7 @@ GameObject:
   - 223: {fileID: 1163434283}
   - 114: {fileID: 1163434282}
   - 114: {fileID: 1163434281}
+  - 225: {fileID: 1163434284}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1073,7 +1074,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1163434279}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -5.6}
   m_LocalScale: {x: 0.017406417, y: 0.017406417, z: 0.017406417}
   m_Children:
   - {fileID: 2076580533}
@@ -1141,6 +1142,17 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!225 &1163434284
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1163434279}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1164138138
 GameObject:
   m_ObjectHideFlags: 0
@@ -1172,13 +1184,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   music: {fileID: 1164138141}
   blip: {fileID: 1164138142}
+  highScore: 0
   keyCode: 0
+  score: 0
+  thescore: 0
   RedCircle: {fileID: 145288, guid: f6787ed8acf4841989b36c15a3e461f2, type: 2}
   GreenCircle: {fileID: 161520, guid: 97662a8e3747c41f181fe621d68aaf95, type: 2}
   YellowCircle: {fileID: 196392, guid: e1c7d812692ea4eca918a7aadd201e12, type: 2}
   WhiteCircle: {fileID: 117946, guid: 43024f0ff0fa14e6eb1cbcec606303b0, type: 2}
-  GOLowScore: {fileID: 101492, guid: de724b61f0dd74cc5916ffda790521d2, type: 2}
-  GOHighScore: {fileID: 137072, guid: 661a81954877745f99ca302bbcebc090, type: 2}
+  GOLowScore: {fileID: 179098, guid: 58e4fee4a44324b72959b2c6b2fc5af7, type: 2}
+  GOHighScore: {fileID: 170510, guid: 66f0d2d7a41fe4643b15b0720f984495, type: 2}
+  canvasGroup: {fileID: 1163434284}
+  GO: 0
   colors:
   - red
   - green
@@ -1427,7 +1444,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1305734254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.08, y: -3.2, z: -0.86}
+  m_LocalPosition: {x: 9.08, y: -3.2, z: -0.71}
   m_LocalScale: {x: 0.07, y: 0.07, z: 0.07}
   m_Children: []
   m_Father: {fileID: 1706457609}
@@ -1987,7 +2004,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1565166903}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.14, y: -1.71, z: 0.22}
+  m_LocalPosition: {x: 8.14, y: -1.71, z: 0.25}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children: []
   m_Father: {fileID: 1706457609}
@@ -2453,12 +2470,13 @@ MonoBehaviour:
   claps: {fileID: 211709603}
   frowns: {fileID: 699230246}
   great: {fileID: 129952, guid: 188b7ccd396a24394b7c341800af9255, type: 2}
-  level1Done: 0
-  level2Done: 0
-  level3Done: 0
-  level4Done: 0
-  level5Done: 0
-  level6Done: 0
+  Thresh2: 100
+  Thresh3: 200
+  Thresh4: 300
+  Thresh5: 400
+  Thresh6: 500
+  highScore: 0
+  GO: 0
 --- !u!114 &2076580537
 MonoBehaviour:
   m_ObjectHideFlags: 0

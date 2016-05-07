@@ -137,8 +137,7 @@ MonoBehaviour:
   GCScript: {fileID: 0}
   y: 0
   points: 0
-  blipColor: {r: 0, g: 0, b: 0, a: 0}
-  originalColor: {r: 1, g: 1, b: 1, a: 0}
+  originalColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21233352
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -226,6 +225,22 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: originalColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: originalColor.a
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

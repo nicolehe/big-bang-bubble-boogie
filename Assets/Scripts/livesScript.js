@@ -16,7 +16,7 @@ function Update() {
 	findLivesShown();
     text.text = "Lives: " + livesShown;
     if (lives == 0){
-    	GameObject.Find("GameController").BroadcastMessage("gameOverFailed");
+    	GameObject.Find("GameController").BroadcastMessage("gameOver");
     }
 }
 
@@ -32,6 +32,9 @@ function loseLife() {
 
 function findLivesShown(){
 	switch(lives){
+		case 0:
+			livesShown = "xxxxx";
+			break;			
 		case 1:
 			livesShown = "<color='#00ffffff'>O</color>xxxx";
 			break;

@@ -3,8 +3,11 @@ import UnityEngine.SceneManagement;
 var music: AudioSource;
 var blip: AudioSource;
 
-var highScore;
+var highScore: int;
 var keyCode: KeyCode;
+var score: int;
+var thescore: int;
+
 
 var RedCircle: GameObject;
 var GreenCircle: GameObject;
@@ -13,6 +16,9 @@ var WhiteCircle: GameObject;
 
 var GOLowScore: GameObject;
 var GOHighScore: GameObject;
+
+var canvasGroup: CanvasGroup;
+var GO = false;
 
 var colors = ['red', 'green', 'white', 'yellow'];
 var colorPick: String;
@@ -44,6 +50,8 @@ var lastG;
 var lastY;
 
 function Start() {
+    highScore = PlayerPrefs.GetInt("High Score");
+    canvasGroup.alpha = 1;
     Time.timeScale = 1;
     bubbleNum = 0;
     music.pitch = 1;
@@ -59,7 +67,12 @@ function Start() {
 }
 
 function Update() {
-    //print(lastW);
+    print(thescore);
+    if (score > highScore) {
+        highScore = score;
+        PlayerPrefs.SetInt("High Score", highScore);
+    }
+
     if (timesFailed < 0) {
         timesFailed = 0;
     }
@@ -98,7 +111,7 @@ function Update() {
 
     if (counting > bubbleTime) {
         bubbleNum++;
-        circle = GameObject.Instantiate(pickColor(), Vector3(Random.Range(-6.9, 6.9), -5, 0), Quaternion.identity);
+        circle = GameObject.Instantiate(pickColor(), Vector3(Random.Range(-6.9, 6.9), -5, -1), Quaternion.identity);
         if (circle.gameObject.name == "YellowCircle(Clone)") {
             circle.name = "y" + bubbleNum;
             yellows.Push(circle.name);
@@ -206,7 +219,6 @@ function keyCheck() {
                     print("NOPE, gotta change W");
                     num = Random.Range(0, whites.length);
                     GameObject.Find(whites[num]).BroadcastMessage("changeColor");
-
                     blip.Play();
                 } else {
                     GameObject.Find("Lives").BroadcastMessage("loseLife");
@@ -221,8 +233,6 @@ function keyCheck() {
                     GameObject.Find(reds[num]).BroadcastMessage("popIt");
                     yield WaitForSeconds(0.05);
                     GameObject.Find(reds[num]).BroadcastMessage("destroy");
-
-                    yield WaitForSeconds(0.05);
                     reds.RemoveAt(num);
                     timesFailed--;
                     lastR = keyInput;
@@ -283,28 +293,31 @@ function keyCheck() {
     }
 }
 
-function gameOverFailed() {
-    Time.timeScale = 0;
+function gameOver() {
+    canvasGroup.alpha = 0;
     music.Stop();
 
-    Instantiate(GOLowScore, Vector3(0, 0, 0), Quaternion.identity);
+
+    if (GO == false) {
+        if (thescore == highScore) {
+            Instantiate(GOHighScore, Vector3(0, 0, -3), Quaternion.identity);
+        } else {
+            Instantiate(GOLowScore, Vector3(0, 0, -3), Quaternion.identity);
+        }
+        GameObject.Find("ScoreText").BroadcastMessage("gameOverScore");
+        GO = true;
+    }
+
+    Time.timeScale = 0.0001;
+    yield WaitForSeconds(5 * Time.timeScale);
 
     if (Input.anyKey) {
-
-        GameObject.Find("GameOverLowScore(Clone)").BroadcastMessage("destroy");
+        GameObject.Find("awwshucks(Clone)").BroadcastMessage("destroy");
         SceneManager.LoadScene('title_scene');
 
     }
 }
 
-function gameOverHighScore() {
-    Time.timeScale = 0;
-    music.Stop();
-
-    Instantiate(GOHighScore, Vector3(0, 0, 0), Quaternion.identity);
-    if (Input.anyKey) {
-        GameObject.Find("GameOverHighScore(Clone)").BroadcastMessage("destroy");
-        SceneManager.LoadScene('title_scene');
-
-    }
+function keepScore(score: int) {
+    thescore = score;
 }

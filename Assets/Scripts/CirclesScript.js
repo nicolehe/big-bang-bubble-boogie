@@ -23,7 +23,7 @@ function Start() {
 
 function Update() {
 	y = transform.position.y;
-	points = 100 / (y + 10);
+	points = 200 / (y + 10);
 	if(y >= 6.2){
 		pop.Play();
 		GameObject.Find("Lives").BroadcastMessage("loseLife");
@@ -38,6 +38,7 @@ function Update() {
 
 function addPoints() {
 	GameObject.Find("ScoreText").BroadcastMessage("addPoints", points);
+	
 }
 
 
