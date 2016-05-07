@@ -146,16 +146,17 @@ function Update() {
         circle = GameObject.Instantiate(pickColor(), Vector3(Random.Range(-6.9, 6.9), -5, 0), Quaternion.identity);
         if (circle.gameObject.name == "YellowCircle(Clone)") {
             circle.name = "y" + bubbleNum;
-            yellows.Push(circle);
+            yellows.Push(circle.name);
+
         } else if (circle.gameObject.name == "RedCircle(Clone)") {
             circle.name = "r" + bubbleNum;
-            reds.Push(circle);
+            reds.Push(circle.name);
         } else if (circle.gameObject.name == "GreenCircle(Clone)") {
             circle.name = "g" + bubbleNum;
-            greens.Push(circle);
+            greens.Push(circle.name);
         } else if (circle.gameObject.name == "WhiteCircle(Clone)") {
             circle.name = "w" + bubbleNum;
-            whites.Push(circle);
+            whites.Push(circle.name);
         }
         //print(circle.name);
         //circle.gameObject.name = "b" + bubbleNum;
@@ -234,14 +235,13 @@ function keyCheck() {
 
         switch (key) {
             case "w":
+            print(whites.length);
                 if (whites.length > 0) {
                     GameObject.Find("ScoreText").BroadcastMessage("addPoints", counting);
                     //pick random white bubble that still exists
                     var num = Random.Range(0, whites.length);
-                    var name = whites[num];
-                    print(name);
+                    GameObject.Find(whites[num]).BroadcastMessage("destroy");//.SendMessage("destroy");
                     whites.RemoveAt(num);
-                    GameObject.Find(name).BroadcastMessage("destroy");
 
                 } else {
                     GameObject.Find("Lives").BroadcastMessage("loseLife");
@@ -250,13 +250,9 @@ function keyCheck() {
             case "r":
                 if (reds.length > 0) {
                     GameObject.Find("ScoreText").BroadcastMessage("addPoints", counting);
-                    //pick random white bubble that still exists
                     num = Random.Range(0, reds.length);
-                    name = reds[num];
-                    print(name);
+                    GameObject.Find(reds[num]).BroadcastMessage("destroy");
                     reds.RemoveAt(num);
-                    GameObject.Find(name).BroadcastMessage("destroy");
-
                 } else {
                     GameObject.Find("Lives").BroadcastMessage("loseLife");
                 }
@@ -264,12 +260,10 @@ function keyCheck() {
             case "g":
                 if (greens.length > 0) {
                     GameObject.Find("ScoreText").BroadcastMessage("addPoints", counting);
-                    //pick random white bubble that still exists
                     num = Random.Range(0, greens.length);
-                    name = greens[num];
-                    print(name);
+                    GameObject.Find(greens[num]).BroadcastMessage("destroy");
                     whites.RemoveAt(num);
-                    GameObject.Find(name).BroadcastMessage("destroy");
+                    
 
                 } else {
                     GameObject.Find("Lives").BroadcastMessage("loseLife");
@@ -278,12 +272,10 @@ function keyCheck() {
             case "y":
                 if (yellows.length > 0) {
                     GameObject.Find("ScoreText").BroadcastMessage("addPoints", counting);
-                    //pick random white bubble that still exists
                     num = Random.Range(0, yellows.length);
-                    name = yellows[num];
+                    GameObject.Find(yellows[num]).BroadcastMessage("destroy");
                     yellows.RemoveAt(num);
-                    GameObject.Find(name).BroadcastMessage("destroy");
-
+                    
                 } else {
                     GameObject.Find("Lives").BroadcastMessage("loseLife");
                 }

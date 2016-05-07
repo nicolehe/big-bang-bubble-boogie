@@ -16,10 +16,7 @@ function Update() {
 		destroy();
 	}
 
-	//if GC doesn't think there should be circles on the screen, self-destruct
-    if(GCScript.circleOnScreen == 0){
-    	Destroy(gameObject);
-    }
+
 
 }
 
