@@ -4,14 +4,10 @@ var pop: AudioSource;
 
 var GCScript: GC;
 var colorN: String;
-var timeCreated: float;
-var counting: float;
 var y: float;
 var points: float;
 
-function Awake() {
-	timeCreated = Time.time;
-}
+
 
 function Start() {
 
@@ -41,5 +37,10 @@ function addPoints() {
 
 function destroy() {
 	print("d");
+	
 	Destroy(gameObject);
+}
+
+function popIt() {
+	transform.localScale += new Vector3(0.5, 0.5, 0.5);
 }

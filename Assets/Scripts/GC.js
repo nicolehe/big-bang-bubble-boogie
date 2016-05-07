@@ -4,7 +4,6 @@ var music: AudioSource;
 var blip: AudioSource;
 
 var highScore;
-public
 var keyCode: KeyCode;
 
 var RedCircle: GameObject;
@@ -15,57 +14,30 @@ var WhiteCircle: GameObject;
 var GOLowScore: GameObject;
 var GOHighScore: GameObject;
 
-var happy: GameObject;
-
 var colors = ['red', 'green', 'white', 'yellow'];
-var colorsOnScreen: Array;
 var colorPick: String;
-var correctButtons: Array;
-var bubbles: Array;
 var yellows: Array;
 var greens: Array;
 var reds: Array;
 var whites: Array;
 var keyInputs: Array;
 
-var createdTime: float = 0;
-var timeActive: float = 0;
-
 var lastTime: float = 0;
 
-var match: boolean = false;
-
 var level: int = 0;
-var circleOnScreen: int = 0;
 
 var thisKey: String;
 var bubbleNum: int = 0;
 
 var bubble: GameObject;
 var circle: GameObject;
-var circle2: GameObject;
-var circle3: GameObject;
-var circle4: GameObject;
-var circle5: GameObject;
-var circle6: GameObject;
-var circle7: GameObject;
-var circle8: GameObject;
 
 var counting: float;
 
 var timesFailed: int;
 
-var GO = true;
-var passed = false;
-var gotOne = 0;
-
 var bubbleTime: float;
 
-//change this variable to make levels shorter or longer, in seconds
-var timeBetweenLevels = 20;
-
-//change this variable to give players more or less time to react, in seconds
-var timeToReact = 5;
 var lastW;
 var lastR;
 var lastG;
@@ -77,14 +49,11 @@ function Start() {
     music.pitch = 1;
 
     timesFailed = 0;
-    //create arrays for which color circles are on screen and which buttons correspond to them
-    colorsOnScreen = new Array();
-    correctButtons = new Array();
+
     yellows = new Array();
     reds = new Array();
     greens = new Array();
     whites = new Array();
-    bubbles = new Array();
     keyInputs = new Array();
 
 }
@@ -127,21 +96,9 @@ function Update() {
             break;
 
     }
-    if (gotOne == level) {
-        passed = true;
-    }
 
-    if (passed) {
-        if (timesFailed > 0) {
-            timesFailed--;
-        }
-        passed = false;
-        gotOne = 0;
-    }
+
     counting = Time.timeSinceLevelLoad - lastTime;
-
-
-
 
     if (counting > bubbleTime) {
         bubbleNum++;
@@ -163,7 +120,6 @@ function Update() {
         lastTime = Time.timeSinceLevelLoad;
 
     }
-
 
 
     switch (timesFailed) {
@@ -191,23 +147,17 @@ function pickColor(): GameObject {
 
     var colorPick = colors[Random.Range(0, colors.length)];
 
-    colorsOnScreen.Push(colorPick);
-    circleOnScreen += 1;
 
     if (colorPick == 'green') {
-        correctButtons.Push('g');
         return GreenCircle;;
 
     } else if (colorPick == 'red') {
-        correctButtons.Push('r');
         return RedCircle;
 
     } else if (colorPick == 'white') {
-        correctButtons.Push('w');
         return WhiteCircle;
 
     } else if (colorPick == 'yellow') {
-        correctButtons.Push('y');
         return YellowCircle;
     }
 }
@@ -215,8 +165,6 @@ function pickColor(): GameObject {
 function audienceNeg() {
     timesFailed++;
 }
-
-
 
 //called if user(s) press a button while circles are on screen
 function keyCheck() {
@@ -235,7 +183,7 @@ function keyCheck() {
             //var lastR = keyInput;
             key = "r";
         } else if (Input.GetKey("g") || Input.GetKey("t") || Input.GetKey("y") || Input.GetKey("h")) {
-           // var lastG = keyInput;
+            // var lastG = keyInput;
             key = "g";
         } else if (Input.GetKey("u") || Input.GetKey("j") || Input.GetKey("k") || Input.GetKey("i")) {
             //var lastY = keyInput;
@@ -247,11 +195,13 @@ function keyCheck() {
             case "w":
 
                 if (whites.length > 0 && keyInput != lastW) {
-                    
-                    //pick random white bubble that still exists
+
                     var num = Random.Range(0, whites.length);
                     GameObject.Find(whites[num]).BroadcastMessage("addPoints");
-                    GameObject.Find(whites[num]).BroadcastMessage("destroy"); //.SendMessage("destroy");
+                    GameObject.Find(whites[num]).BroadcastMessage("popIt");
+                    yield WaitForSeconds(0.05);
+                    GameObject.Find(whites[num]).BroadcastMessage("destroy");
+
                     whites.RemoveAt(num);
                     timesFailed--;
                     lastW = keyInput;
@@ -266,10 +216,14 @@ function keyCheck() {
             case "r":
 
                 if (reds.length > 0 && keyInput != lastR) {
-                    
+
                     num = Random.Range(0, reds.length);
                     GameObject.Find(reds[num]).BroadcastMessage("addPoints");
+                    GameObject.Find(reds[num]).BroadcastMessage("popIt");
+                    yield WaitForSeconds(0.05);
                     GameObject.Find(reds[num]).BroadcastMessage("destroy");
+
+                    yield WaitForSeconds(0.05);
                     reds.RemoveAt(num);
                     timesFailed--;
                     lastR = keyInput;
@@ -283,9 +237,11 @@ function keyCheck() {
                 break;
             case "g":
                 if (greens.length > 0 && keyInput != lastG) {
-                    
+
                     num = Random.Range(0, greens.length);
                     GameObject.Find(greens[num]).BroadcastMessage("addPoints");
+                    GameObject.Find(greens[num]).BroadcastMessage("popIt");
+                    yield WaitForSeconds(0.05);
                     GameObject.Find(greens[num]).BroadcastMessage("destroy");
                     greens.RemoveAt(num);
                     timesFailed--;
@@ -300,10 +256,12 @@ function keyCheck() {
                 break;
             case "y":
                 if (yellows.length > 0 && keyInput != lastY) {
-                    
-                    
+
+
                     num = Random.Range(0, yellows.length);
                     GameObject.Find(yellows[num]).BroadcastMessage("addPoints");
+                    GameObject.Find(yellows[num]).BroadcastMessage("popIt");
+                    yield WaitForSeconds(0.05);
                     GameObject.Find(yellows[num]).BroadcastMessage("destroy");
                     yellows.RemoveAt(num);
                     timesFailed--;
@@ -324,12 +282,11 @@ function keyCheck() {
 function gameOverFailed() {
     Time.timeScale = 0;
     music.Stop();
-    if (GO == true) {
-        Instantiate(GOLowScore, Vector3(0, 0, 0), Quaternion.identity);
-        GO = false;
-    }
+
+    Instantiate(GOLowScore, Vector3(0, 0, 0), Quaternion.identity);
+
     if (Input.anyKey) {
-        GO = true;
+
         GameObject.Find("GameOverLowScore(Clone)").BroadcastMessage("destroy");
         SceneManager.LoadScene('title_scene');
 
@@ -339,12 +296,9 @@ function gameOverFailed() {
 function gameOverHighScore() {
     Time.timeScale = 0;
     music.Stop();
-    if (GO == true) {
-        Instantiate(GOHighScore, Vector3(0, 0, 0), Quaternion.identity);
-        GO = false;
-    }
+
+    Instantiate(GOHighScore, Vector3(0, 0, 0), Quaternion.identity);
     if (Input.anyKey) {
-        GO = true;
         GameObject.Find("GameOverHighScore(Clone)").BroadcastMessage("destroy");
         SceneManager.LoadScene('title_scene');
 
