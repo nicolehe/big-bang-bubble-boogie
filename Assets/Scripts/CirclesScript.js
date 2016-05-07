@@ -1,5 +1,6 @@
 ﻿#pragma strict
 import UnityEngine.SceneManagement;
+var pop: AudioSource;
 
 var GCScript: GC;
 var colorN: String;
@@ -12,6 +13,7 @@ function Start() {
 
 function Update() {
 	if(transform.position.y >= 6.2){
+		pop.Play();
 		GameObject.Find("Lives").BroadcastMessage("loseLife");
 		GameObject.Find("GameController").BroadcastMessage("audienceNeg");
 		destroy();
@@ -23,6 +25,5 @@ function Update() {
 
 
 function destroy() {
-	print("REICEIVED");
 	Destroy(gameObject);
 }

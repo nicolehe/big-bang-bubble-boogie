@@ -1,6 +1,7 @@
 #pragma strict
 import UnityEngine.SceneManagement;
 var music: AudioSource;
+var blip: AudioSource;
 
 var highScore;
 public
@@ -254,7 +255,9 @@ function keyCheck() {
                     timesFailed--;
                     lastW = keyInput;
                 } else if (whites.length > 0 && keyInput == lastW) {
+                    blip.Stop();
                     print("NOPE, gotta change W");
+                    blip.Play();
                 } else {
                     GameObject.Find("Lives").BroadcastMessage("loseLife");
                 }
@@ -269,7 +272,9 @@ function keyCheck() {
                     timesFailed--;
                     lastR = keyInput;
                 } else if (reds.length > 0 && keyInput == lastR) {
+                    blip.Stop();
                     print("NOPE, gotta change R");
+                    blip.Play();
                 } else {
                     GameObject.Find("Lives").BroadcastMessage("loseLife");
                 }
@@ -283,7 +288,9 @@ function keyCheck() {
                     timesFailed--;
                     lastG = keyInput;
                 } else if (greens.length > 0 && keyInput == lastG) {
+                    blip.Stop();
                     print("NOPE, gotta change G");
+                    blip.Play();
                 } else {
                     GameObject.Find("Lives").BroadcastMessage("loseLife");
                 }
@@ -297,7 +304,9 @@ function keyCheck() {
                     timesFailed--;
                     lastY = keyInput;
                 } else if (yellows.length > 0 && keyInput == lastY) {
+                    blip.Stop();
                     print("NOPE, gotta change Y");
+                    blip.Play();
                 } else {
                     GameObject.Find("Lives").BroadcastMessage("loseLife");
                 }
