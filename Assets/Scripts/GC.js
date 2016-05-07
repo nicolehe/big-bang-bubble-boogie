@@ -64,10 +64,6 @@ function Update() {
         timesFailed = 0;
     }
     keyCheck();
-    // print(yellows);
-    // print(greens);
-    // print(whites);
-    // print(reds);
 
     switch (level) {
         case 1:
@@ -208,6 +204,9 @@ function keyCheck() {
                 } else if (whites.length > 0 && keyInput == lastW) {
                     blip.Stop();
                     print("NOPE, gotta change W");
+                    num = Random.Range(0, whites.length);
+                    GameObject.Find(whites[num]).BroadcastMessage("changeColor");
+
                     blip.Play();
                 } else {
                     GameObject.Find("Lives").BroadcastMessage("loseLife");
@@ -230,6 +229,8 @@ function keyCheck() {
                 } else if (reds.length > 0 && keyInput == lastR) {
                     blip.Stop();
                     print("NOPE, gotta change R");
+                    num = Random.Range(0, reds.length);
+                    GameObject.Find(reds[num]).BroadcastMessage("changeColor");
                     blip.Play();
                 } else {
                     GameObject.Find("Lives").BroadcastMessage("loseLife");
@@ -249,6 +250,8 @@ function keyCheck() {
                 } else if (greens.length > 0 && keyInput == lastG) {
                     blip.Stop();
                     print("NOPE, gotta change G");
+                    num = Random.Range(0, greens.length);
+                    GameObject.Find(greens[num]).BroadcastMessage("changeColor");
                     blip.Play();
                 } else {
                     GameObject.Find("Lives").BroadcastMessage("loseLife");
@@ -268,7 +271,8 @@ function keyCheck() {
                     lastY = keyInput;
                 } else if (yellows.length > 0 && keyInput == lastY) {
                     blip.Stop();
-                    print("NOPE, gotta change Y");
+                    num = Random.Range(0, yellows.length);
+                    GameObject.Find(yellows[num]).BroadcastMessage("changeColor");
                     blip.Play();
                 } else {
                     GameObject.Find("Lives").BroadcastMessage("loseLife");
