@@ -50,6 +50,7 @@ var lastG;
 var lastY;
 
 function Start() {
+    thescore = 0;
     highScore = PlayerPrefs.GetInt("High Score");
     canvasGroup.alpha = 1;
     Time.timeScale = 1;
@@ -67,7 +68,8 @@ function Start() {
 }
 
 function Update() {
-    print(thescore);
+    //keepScore(score);
+    print(score);
     if (score > highScore) {
         highScore = score;
         PlayerPrefs.SetInt("High Score", highScore);

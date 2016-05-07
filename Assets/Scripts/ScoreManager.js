@@ -30,6 +30,7 @@ function Awake() {
 
 function Update() {
     //print(Time.timeSinceLevelLoad);
+    GameObject.Find("GameController").BroadcastMessage("keepScore", score);
     if (GO == false){
         updateScore();
     }
@@ -85,7 +86,7 @@ function updateScore() {
 
 
 function gameOverScore() {
-    GameObject.Find("GameController").BroadcastMessage("keepScore", score);
+
     GameObject.Find("finalscore").BroadcastMessage("gameOver", score);
 }
 
