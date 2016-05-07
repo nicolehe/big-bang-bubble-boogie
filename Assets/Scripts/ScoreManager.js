@@ -84,8 +84,8 @@ function Update() {
 
 
 
-    function addPoints(counting: float) {
-        score += Mathf.Floor(8 / counting);
+    function addPoints(points: float) {
+        score += Mathf.Floor(points);
         //print(score);
         Instantiate(great, Vector3(0, 1, 0), Quaternion.identity);
         if (claps.isPlaying) {

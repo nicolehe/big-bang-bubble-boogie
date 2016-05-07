@@ -90,7 +90,7 @@ function Start() {
 }
 
 function Update() {
-    print(lastW);
+    //print(lastW);
     if (timesFailed < 0) {
         timesFailed = 0;
     }
@@ -247,9 +247,10 @@ function keyCheck() {
             case "w":
 
                 if (whites.length > 0 && keyInput != lastW) {
-                    GameObject.Find("ScoreText").BroadcastMessage("addPoints", counting);
+                    
                     //pick random white bubble that still exists
                     var num = Random.Range(0, whites.length);
+                    GameObject.Find(whites[num]).BroadcastMessage("addPoints");
                     GameObject.Find(whites[num]).BroadcastMessage("destroy"); //.SendMessage("destroy");
                     whites.RemoveAt(num);
                     timesFailed--;
@@ -265,8 +266,9 @@ function keyCheck() {
             case "r":
 
                 if (reds.length > 0 && keyInput != lastR) {
-                    GameObject.Find("ScoreText").BroadcastMessage("addPoints", counting);
+                    
                     num = Random.Range(0, reds.length);
+                    GameObject.Find(reds[num]).BroadcastMessage("addPoints");
                     GameObject.Find(reds[num]).BroadcastMessage("destroy");
                     reds.RemoveAt(num);
                     timesFailed--;
@@ -281,8 +283,9 @@ function keyCheck() {
                 break;
             case "g":
                 if (greens.length > 0 && keyInput != lastG) {
-                    GameObject.Find("ScoreText").BroadcastMessage("addPoints", counting);
+                    
                     num = Random.Range(0, greens.length);
+                    GameObject.Find(greens[num]).BroadcastMessage("addPoints");
                     GameObject.Find(greens[num]).BroadcastMessage("destroy");
                     greens.RemoveAt(num);
                     timesFailed--;
@@ -297,8 +300,10 @@ function keyCheck() {
                 break;
             case "y":
                 if (yellows.length > 0 && keyInput != lastY) {
-                    GameObject.Find("ScoreText").BroadcastMessage("addPoints", counting);
+                    
+                    
                     num = Random.Range(0, yellows.length);
+                    GameObject.Find(yellows[num]).BroadcastMessage("addPoints");
                     GameObject.Find(yellows[num]).BroadcastMessage("destroy");
                     yellows.RemoveAt(num);
                     timesFailed--;
