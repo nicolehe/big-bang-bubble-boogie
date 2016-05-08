@@ -77,7 +77,7 @@ function Update() {
         GameObject.Find("SpaceMermaid").BroadcastMessage("currentLevel", 6);
         GameObject.Find("Astrocrab").BroadcastMessage("currentLevel", 6);
     } else if (Time.timeSinceLevelLoad >= 175) {
-        GameObject.Find("GameController").BroadcastMessage("gameOver");
+        //GameObject.Find("GameController").BroadcastMessage("gameOver");
     }
 }
 function updateScore() {

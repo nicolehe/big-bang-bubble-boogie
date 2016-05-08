@@ -317,7 +317,7 @@ function gameOver() {
     yield WaitForSeconds(5 * Time.timeScale);
 
     if (Input.anyKeyDown) {
-        GameObject.Find("awwshucks(Clone)").BroadcastMessage("destroy");
+        //GameObject.Find("awwshucks(Clone)").BroadcastMessage("destroy");
         SceneManager.LoadScene('title_scene');
 
     }

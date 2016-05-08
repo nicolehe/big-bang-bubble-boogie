@@ -15,7 +15,7 @@ function Awake() {
  }
 function Start() {
 	var originalColor = GetComponent(SpriteRenderer).color;
-	print(originalColor);
+	//print(originalColor);
     GCScript = GameObject.Find('GameController').GetComponent(GC);
     GetComponent(Rigidbody2D).gravityScale = -0.3;
     
@@ -38,7 +38,7 @@ function Update() {
 
 function addPoints() {
 	GameObject.Find("ScoreText").BroadcastMessage("addPoints", points);
-	
+
 }
 
 
