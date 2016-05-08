@@ -29,11 +29,11 @@ function Awake() {
     //score = 0;
 
     highScore = PlayerPrefs.GetInt("High Score");
-    thresh2 = 100;
-    thresh3 = 200;
-    thresh4 = 300;
-    thresh5 = 400;
-    thresh6 = 500;
+    thresh2 = 150;
+    thresh3 = 300;
+    thresh4 = 450;
+    thresh5 = 650;
+    thresh6 = 850;
 
 }
 
