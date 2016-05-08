@@ -508,7 +508,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 0}
   lives: 5
-  frowns: {fileID: 19869760, guid: 1a9bde11596524c33bf873bda1e98568, type: 2}
+  frowns: {fileID: 699230246}
   boo: {fileID: 139052, guid: 00f575376b995412ba25e9057749f2ff, type: 2}
 --- !u!114 &489707889
 MonoBehaviour:
