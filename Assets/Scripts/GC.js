@@ -78,7 +78,9 @@ function Update() {
     if (timesFailed < 0) {
         timesFailed = 0;
     }
-    keyCheck();
+    if (GO == false) {
+        keyCheck();
+    }
 
     switch (level) {
         case 1:
@@ -313,7 +315,7 @@ function gameOver() {
     Time.timeScale = 0.0001;
     yield WaitForSeconds(5 * Time.timeScale);
 
-    if (Input.anyKey) {
+    if (Input.anyKeyDown) {
         GameObject.Find("awwshucks(Clone)").BroadcastMessage("destroy");
         SceneManager.LoadScene('title_scene');
 
