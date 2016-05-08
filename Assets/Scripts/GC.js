@@ -69,8 +69,8 @@ function Start() {
 
 function Update() {
     //keepScore(score);
-    print(thescore);
-    print(highScore);
+    // print(thescore);
+
     if (thescore > highScore) {
         highScore = thescore;
         PlayerPrefs.SetInt("High Score", highScore);
@@ -97,15 +97,15 @@ function Update() {
             music.pitch = 1.2;
             break;
         case 4:
-            bubbleTime = 0.5;
+            bubbleTime = 0.7;
             music.pitch = 1.3;
             break;
         case 5:
-            bubbleTime = 0.3;
+            bubbleTime = 0.5;
             music.pitch = 1.4;
             break;
         case 6:
-            bubbleTime = 0.2;
+            bubbleTime = 0.4;
             music.pitch = 1.5;
             break;
 
@@ -299,11 +299,14 @@ function keyCheck() {
 }
 
 function gameOver() {
+    var GOTime: float;
+
     canvasGroup.alpha = 0;
     music.Stop();
 
 
     if (GO == false) {
+        GOTime = Time.time;
         if (thescore == highScore) {
             Instantiate(GOHighScore, Vector3(0, 0, -3), Quaternion.identity);
         } else {
@@ -316,7 +319,7 @@ function gameOver() {
     Time.timeScale = 0.0001;
     yield WaitForSeconds(5 * Time.timeScale);
 
-    if (Input.anyKeyDown) {
+    if (Input.anyKeyDown || Time.time - GOTime > 10) {
         //GameObject.Find("awwshucks(Clone)").BroadcastMessage("destroy");
         SceneManager.LoadScene('title_scene');
 
