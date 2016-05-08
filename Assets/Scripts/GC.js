@@ -319,7 +319,7 @@ function gameOver() {
     Time.timeScale = 0.0001;
     yield WaitForSeconds(5 * Time.timeScale);
 
-    if (Input.anyKeyDown || Time.time - GOTime > 10) {
+    if (Input.anyKeyDown || Time.time - GOTime > 15) {
         //GameObject.Find("awwshucks(Clone)").BroadcastMessage("destroy");
         SceneManager.LoadScene('title_scene');
 
