@@ -85,27 +85,27 @@ function Update() {
 
     switch (level) {
         case 1:
-            bubbleTime = 3;
+            bubbleTime = 2;
             music.pitch = 1;
             break;
         case 2:
-            bubbleTime = 2;
+            bubbleTime = 1.5;
             music.pitch = 1.1;
             break;
         case 3:
-            bubbleTime = 1.5;
+            bubbleTime = 1;
             music.pitch = 1.2;
             break;
         case 4:
-            bubbleTime = 1;
+            bubbleTime = 0.7;
             music.pitch = 1.3;
             break;
         case 5:
-            bubbleTime = 0.7;
+            bubbleTime = 0.5;
             music.pitch = 1.4;
             break;
         case 6:
-            bubbleTime = 0.5;
+            bubbleTime = 0.3;
             music.pitch = 1.5;
             break;
 
