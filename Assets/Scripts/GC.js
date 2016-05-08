@@ -69,9 +69,10 @@ function Start() {
 
 function Update() {
     //keepScore(score);
-    print(score);
-    if (score > highScore) {
-        highScore = score;
+    print(thescore);
+    print(highScore);
+    if (thescore > highScore) {
+        highScore = thescore;
         PlayerPrefs.SetInt("High Score", highScore);
     }
 
