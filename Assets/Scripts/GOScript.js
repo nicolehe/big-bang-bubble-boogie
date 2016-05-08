@@ -10,8 +10,6 @@ highScore = PlayerPrefs.GetInt("High Score");
 }
 
 function Update () {
-	print(highScore);
-	print(thescore);
     if (thescore > highScore) {
         highScore = thescore;
         PlayerPrefs.SetInt("High Score", highScore);
