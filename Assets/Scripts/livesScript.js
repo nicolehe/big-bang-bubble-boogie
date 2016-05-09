@@ -21,13 +21,13 @@ function Update() {
 }
 
 function loseLife() {
+	lives--;
     Instantiate(boo, Vector3(0, 1, 0), Quaternion.identity);
     if (frowns.isPlaying) {
         frowns.Stop();
     }
     frowns.Play();
 
-    lives--;
 }
 
 function findLivesShown(){
@@ -36,18 +36,19 @@ function findLivesShown(){
 			livesShown = "xxxxx";
 			break;			
 		case 1:
-			livesShown = "<color='#00ffffff'>O</color>xxxx";
+			livesShown = "<color='#00ffffff'>●</color>xxxx";
 			break;
 		case 2:
-			livesShown = "<color='#00ffffff'>OO</color>xxx";
+			livesShown = "<color='#00ffffff'>●●</color>xxx";
 			break;
 		case 3:
-			livesShown = "<color='#00ffffff'>OOO</color>xx";
+			livesShown = "<color='#00ffffff'>●●●</color>xx";
 			break;
 		case 4:
-			livesShown = "<color='#00ffffff'>OOOO</color>x";
+			livesShown = "<color='#00ffffff'>●●●●</color>x";
 			break;
 		case 5:
-			livesShown ="<color='#00ffffff'>OOOOO</color>";
+			livesShown ="<color='#00ffffff'>●●●●●</color>";
+			break;
 	}
 }

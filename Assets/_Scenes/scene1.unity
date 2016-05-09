@@ -191,7 +191,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2cb70876f3b7c4300a890c394165768d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e2fe5f56006dd40c388ef8bfb70b315a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -242,13 +242,13 @@ RectTransform:
   m_GameObject: {fileID: 112607340}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 2}
-  m_LocalScale: {x: 1.55, y: 1.55, z: 1.7406417}
+  m_LocalScale: {x: 0.23, y: 0.23, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.49, y: 0.109999955}
+  m_AnchoredPosition: {x: 0.2, y: -0.07}
   m_SizeDelta: {x: 20.1, y: 6.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &112607345
@@ -1235,7 +1235,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 95bbffd57220c4ec4964a11306fc3a79, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.57
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1444,8 +1444,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1305734254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.08, y: -3.2, z: -0.71}
-  m_LocalScale: {x: 0.07, y: 0.07, z: 0.07}
+  m_LocalPosition: {x: 9.57, y: -3.16, z: -0.71}
+  m_LocalScale: {x: 0.07627373, y: 0.076273724, z: 0.076273724}
   m_Children: []
   m_Father: {fileID: 1706457609}
   m_RootOrder: 3
@@ -2470,12 +2470,18 @@ MonoBehaviour:
   claps: {fileID: 211709603}
   frowns: {fileID: 699230246}
   great: {fileID: 129952, guid: 188b7ccd396a24394b7c341800af9255, type: 2}
-  Thresh2: 100
-  Thresh3: 200
-  Thresh4: 300
-  Thresh5: 400
-  Thresh6: 500
+  thresh2: 0
+  thresh3: 0
+  thresh4: 0
+  thresh5: 0
+  thresh6: 0
   highScore: 0
+  l1Done: 0
+  l2Done: 0
+  l3Done: 0
+  l4Done: 0
+  l5Done: 0
+  l6Done: 0
   GO: 0
 --- !u!114 &2076580537
 MonoBehaviour:

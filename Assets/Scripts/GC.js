@@ -97,15 +97,15 @@ function Update() {
             music.pitch = 1.2;
             break;
         case 4:
-            bubbleTime = 0.7;
+            bubbleTime = 0.8;
             music.pitch = 1.3;
             break;
         case 5:
-            bubbleTime = 0.5;
+            bubbleTime = 0.7;
             music.pitch = 1.4;
             break;
         case 6:
-            bubbleTime = 0.3;
+            bubbleTime = 0.6;
             music.pitch = 1.5;
             break;
 
@@ -120,7 +120,6 @@ function Update() {
         if (circle.gameObject.name == "YellowCircle(Clone)") {
             circle.name = "y" + bubbleNum;
             yellows.Push(circle.name);
-
         } else if (circle.gameObject.name == "RedCircle(Clone)") {
             circle.name = "r" + bubbleNum;
             reds.Push(circle.name);
@@ -209,8 +208,7 @@ function keyCheck() {
             case "w":
 
                 if (whites.length > 0 && keyInput != lastW) {
-
-                    var num = Random.Range(0, whites.length);
+                    var num = 0;
                     GameObject.Find(whites[num]).BroadcastMessage("addPoints");
                     GameObject.Find(whites[num]).BroadcastMessage("popIt");
                     yield WaitForSeconds(0.05);
@@ -222,7 +220,7 @@ function keyCheck() {
                 } else if (whites.length > 0 && keyInput == lastW) {
                     blip.Stop();
                     print("NOPE, gotta change W");
-                    num = Random.Range(0, whites.length);
+                    num = 0;
                     GameObject.Find(whites[num]).BroadcastMessage("changeColor");
                     blip.Play();
                 } else {
@@ -233,7 +231,7 @@ function keyCheck() {
 
                 if (reds.length > 0 && keyInput != lastR) {
 
-                    num = Random.Range(0, reds.length);
+                    num = 0;
                     GameObject.Find(reds[num]).BroadcastMessage("addPoints");
                     GameObject.Find(reds[num]).BroadcastMessage("popIt");
                     yield WaitForSeconds(0.05);
@@ -244,7 +242,7 @@ function keyCheck() {
                 } else if (reds.length > 0 && keyInput == lastR) {
                     blip.Stop();
                     print("NOPE, gotta change R");
-                    num = Random.Range(0, reds.length);
+                    num = 0;
                     GameObject.Find(reds[num]).BroadcastMessage("changeColor");
                     blip.Play();
                 } else {
@@ -254,7 +252,7 @@ function keyCheck() {
             case "g":
                 if (greens.length > 0 && keyInput != lastG) {
 
-                    num = Random.Range(0, greens.length);
+                    num = 0;
                     GameObject.Find(greens[num]).BroadcastMessage("addPoints");
                     GameObject.Find(greens[num]).BroadcastMessage("popIt");
                     yield WaitForSeconds(0.05);
@@ -265,7 +263,7 @@ function keyCheck() {
                 } else if (greens.length > 0 && keyInput == lastG) {
                     blip.Stop();
                     print("NOPE, gotta change G");
-                    num = Random.Range(0, greens.length);
+                    num = 0;
                     GameObject.Find(greens[num]).BroadcastMessage("changeColor");
                     blip.Play();
                 } else {
@@ -276,7 +274,7 @@ function keyCheck() {
                 if (yellows.length > 0 && keyInput != lastY) {
 
 
-                    num = Random.Range(0, yellows.length);
+                    num = 0;
                     GameObject.Find(yellows[num]).BroadcastMessage("addPoints");
                     GameObject.Find(yellows[num]).BroadcastMessage("popIt");
                     yield WaitForSeconds(0.05);
@@ -286,7 +284,7 @@ function keyCheck() {
                     lastY = keyInput;
                 } else if (yellows.length > 0 && keyInput == lastY) {
                     blip.Stop();
-                    num = Random.Range(0, yellows.length);
+                    num = 0;
                     GameObject.Find(yellows[num]).BroadcastMessage("changeColor");
                     blip.Play();
                 } else {
