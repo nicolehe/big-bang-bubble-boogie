@@ -7,6 +7,7 @@ var GCScript: GC;
 var y: float;
 var points: float;
 var originalColor: Color;
+var myColor: String;
 
 
 function Awake() {
@@ -22,12 +23,14 @@ function Start() {
 }
 
 function Update() {
+	//print("my color is" + myColor);
 	y = transform.position.y;
 	points = 200 / (y + 10);
 	if(y >= 6.2){
 		pop.Play();
 		GameObject.Find("Lives").BroadcastMessage("loseLife");
 		GameObject.Find("GameController").BroadcastMessage("audienceNeg");
+		GameObject.Find("GameController").BroadcastMessage("removeFromArray", myColor);
 		destroy();
 	}
 

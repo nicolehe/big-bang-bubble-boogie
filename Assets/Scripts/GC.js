@@ -68,8 +68,9 @@ function Start() {
 }
 
 function Update() {
-    //keepScore(score);
-    // print(thescore);
+print("g" + greens.length);
+print("r" + reds.length);
+
 
     if (thescore > highScore) {
         highScore = thescore;
@@ -206,14 +207,12 @@ function keyCheck() {
 
         switch (key) {
             case "w":
-
                 if (whites.length > 0 && keyInput != lastW) {
                     var num = 0;
                     GameObject.Find(whites[num]).BroadcastMessage("addPoints");
                     GameObject.Find(whites[num]).BroadcastMessage("popIt");
                     yield WaitForSeconds(0.05);
                     GameObject.Find(whites[num]).BroadcastMessage("destroy");
-
                     whites.RemoveAt(num);
                     timesFailed--;
                     lastW = keyInput;
@@ -326,4 +325,21 @@ function gameOver() {
 
 function keepScore(score: int) {
     thescore = score;
+}
+
+function removeFromArray(myColor: String) {
+
+    switch (myColor) {
+        case "red":
+        reds.RemoveAt(0);
+        break;
+        case "green":
+        greens.RemoveAt(0);
+        break;
+        case "white":
+        whites.RemoveAt(0);
+        break;
+        yellows.RemoveAt(0);
+        break;
+    }
 }
