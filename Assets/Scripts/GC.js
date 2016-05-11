@@ -43,11 +43,12 @@ var counting: float;
 var timesFailed: int;
 
 var bubbleTime: float;
-
-var lastW;
-var lastR;
 var lastG;
+var lastR;
+var lastW; 
 var lastY;
+
+var lastKeys = {"lastG": "0", "lastR": "0", "lastW": "0", "lastY": "0"};
 
 function Start() {
     thescore = 0;
@@ -65,11 +66,16 @@ function Start() {
     whites = new Array();
     keyInputs = new Array();
 
+
+
 }
 
 function Update() {
-print("g" + greens.length);
-print("r" + reds.length);
+    // print("lastW " + lastW);
+    // print("lastR " + lastR);
+    // print("g" + greens.length);
+    // print("r" + reds.length);
+ 
 
 
     if (thescore > highScore) {
@@ -180,14 +186,15 @@ function audienceNeg() {
     timesFailed++;
 }
 
+
 //called if user(s) press a button while circles are on screen
 function keyCheck() {
+
+
     //print(lastW);
     if (Input.anyKeyDown) {
         keyInputs = ["q", "w", "a", "s", "e", "d", "r", "f", "g", "t", "y", "h", "u", "j", "k", "i"];
         var keyInput = Input.inputString;
-
-
 
         var key;
         if (Input.GetKey("q") || Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s")) {
@@ -207,91 +214,37 @@ function keyCheck() {
 
         switch (key) {
             case "w":
-                if (whites.length > 0 && keyInput != lastW) {
-                    var num = 0;
-                    GameObject.Find(whites[num]).BroadcastMessage("addPoints");
-                    GameObject.Find(whites[num]).BroadcastMessage("popIt");
-                    yield WaitForSeconds(0.05);
-                    GameObject.Find(whites[num]).BroadcastMessage("destroy");
-                    whites.RemoveAt(num);
-                    timesFailed--;
-                    lastW = keyInput;
-                } else if (whites.length > 0 && keyInput == lastW) {
-                    blip.Stop();
-                    print("NOPE, gotta change W");
-                    num = 0;
-                    GameObject.Find(whites[num]).BroadcastMessage("changeColor");
-                    blip.Play();
-                } else {
-                    GameObject.Find("Lives").BroadcastMessage("loseLife");
-                }
+                bubbles(whites, "lastW", keyInput);
                 break;
             case "r":
-
-                if (reds.length > 0 && keyInput != lastR) {
-
-                    num = 0;
-                    GameObject.Find(reds[num]).BroadcastMessage("addPoints");
-                    GameObject.Find(reds[num]).BroadcastMessage("popIt");
-                    yield WaitForSeconds(0.05);
-                    GameObject.Find(reds[num]).BroadcastMessage("destroy");
-                    reds.RemoveAt(num);
-                    timesFailed--;
-                    lastR = keyInput;
-                } else if (reds.length > 0 && keyInput == lastR) {
-                    blip.Stop();
-                    print("NOPE, gotta change R");
-                    num = 0;
-                    GameObject.Find(reds[num]).BroadcastMessage("changeColor");
-                    blip.Play();
-                } else {
-                    GameObject.Find("Lives").BroadcastMessage("loseLife");
-                }
+                bubbles(reds, "lastR", keyInput);
                 break;
             case "g":
-                if (greens.length > 0 && keyInput != lastG) {
-
-                    num = 0;
-                    GameObject.Find(greens[num]).BroadcastMessage("addPoints");
-                    GameObject.Find(greens[num]).BroadcastMessage("popIt");
-                    yield WaitForSeconds(0.05);
-                    GameObject.Find(greens[num]).BroadcastMessage("destroy");
-                    greens.RemoveAt(num);
-                    timesFailed--;
-                    lastG = keyInput;
-                } else if (greens.length > 0 && keyInput == lastG) {
-                    blip.Stop();
-                    print("NOPE, gotta change G");
-                    num = 0;
-                    GameObject.Find(greens[num]).BroadcastMessage("changeColor");
-                    blip.Play();
-                } else {
-                    GameObject.Find("Lives").BroadcastMessage("loseLife");
-                }
+                bubbles(greens, "lastG", keyInput);
                 break;
             case "y":
-                if (yellows.length > 0 && keyInput != lastY) {
-
-
-                    num = 0;
-                    GameObject.Find(yellows[num]).BroadcastMessage("addPoints");
-                    GameObject.Find(yellows[num]).BroadcastMessage("popIt");
-                    yield WaitForSeconds(0.05);
-                    GameObject.Find(yellows[num]).BroadcastMessage("destroy");
-                    yellows.RemoveAt(num);
-                    timesFailed--;
-                    lastY = keyInput;
-                } else if (yellows.length > 0 && keyInput == lastY) {
-                    blip.Stop();
-                    num = 0;
-                    GameObject.Find(yellows[num]).BroadcastMessage("changeColor");
-                    blip.Play();
-                } else {
-                    GameObject.Find("Lives").BroadcastMessage("loseLife");
-                }
+                bubbles(yellows, "lastY", keyInput);
                 break;
         }
 
+    }
+}
+
+function bubbles(arr: Array, lastKey, keyInput: String) {
+    if (arr.length > 0 && keyInput != lastKeys[lastKey]) {
+        GameObject.Find(arr[0]).BroadcastMessage("addPoints");
+        GameObject.Find(arr[0]).BroadcastMessage("popIt");
+        yield WaitForSeconds(0.05);
+        GameObject.Find(arr[0]).BroadcastMessage("destroy");
+        arr.RemoveAt(0);
+        timesFailed--;
+        lastKeys[lastKey] = keyInput;
+    } else if (arr.length > 0 && keyInput == lastKeys[lastKey]) {
+        blip.Stop();
+        GameObject.Find(arr[0]).BroadcastMessage("changeColor");
+        blip.Play();
+    } else {
+        GameObject.Find("Lives").BroadcastMessage("loseLife");
     }
 }
 
@@ -331,15 +284,16 @@ function removeFromArray(myColor: String) {
 
     switch (myColor) {
         case "red":
-        reds.RemoveAt(0);
-        break;
+            reds.RemoveAt(0);
+            break;
         case "green":
-        greens.RemoveAt(0);
-        break;
+            greens.RemoveAt(0);
+            break;
         case "white":
-        whites.RemoveAt(0);
-        break;
-        yellows.RemoveAt(0);
-        break;
+            whites.RemoveAt(0);
+            break;
+        case "yellow":
+            yellows.RemoveAt(0);
+            break;
     }
 }
