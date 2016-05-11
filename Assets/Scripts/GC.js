@@ -26,7 +26,6 @@ var yellows: Array;
 var greens: Array;
 var reds: Array;
 var whites: Array;
-var keyInputs: Array;
 
 var lastTime: float = 0;
 
@@ -45,10 +44,11 @@ var timesFailed: int;
 var bubbleTime: float;
 var lastG;
 var lastR;
-var lastW; 
+var lastW;
 var lastY;
+var stage;
 
-var lastKeys = {"lastG": "0", "lastR": "0", "lastW": "0", "lastY": "0"};
+var lastKeys = { "lastG": "0", "lastR": "0", "lastW": "0", "lastY": "0" };
 
 function Start() {
     thescore = 0;
@@ -64,9 +64,7 @@ function Start() {
     reds = new Array();
     greens = new Array();
     whites = new Array();
-    keyInputs = new Array();
-
-
+    stage = 1;
 
 }
 
@@ -75,7 +73,7 @@ function Update() {
     // print("lastR " + lastR);
     // print("g" + greens.length);
     // print("r" + reds.length);
- 
+
 
 
     if (thescore > highScore) {
@@ -189,48 +187,46 @@ function audienceNeg() {
 
 //called if user(s) press a button while circles are on screen
 function keyCheck() {
-
-
-    //print(lastW);
     if (Input.anyKeyDown) {
-        keyInputs = ["q", "w", "a", "s", "e", "d", "r", "f", "g", "t", "y", "h", "u", "j", "k", "i"];
         var keyInput = Input.inputString;
-
-        var key;
+        var bColor;
         if (Input.GetKey("q") || Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s")) {
-            //var lastW = keyInput;
-            key = "w";
+            bColor = "w";
         } else if (Input.GetKey("e") || Input.GetKey("d") || Input.GetKey("r") || Input.GetKey("f")) {
-            //var lastR = keyInput;
-            key = "r";
+            bColor = "r";
         } else if (Input.GetKey("g") || Input.GetKey("t") || Input.GetKey("y") || Input.GetKey("h")) {
-            // var lastG = keyInput;
-            key = "g";
+            bColor = "g";
         } else if (Input.GetKey("u") || Input.GetKey("j") || Input.GetKey("k") || Input.GetKey("i")) {
-            //var lastY = keyInput;
-            key = "y";
+            bColor = "y";
         }
 
-
-        switch (key) {
-            case "w":
-                bubbles(whites, "lastW", keyInput);
+        switch (stage) {
+            case 1:
+                switch (bColor) {
+                    case "w":
+                        bubbles1(whites, "lastW", keyInput);
+                        break;
+                    case "r":
+                        bubbles1(reds, "lastR", keyInput);
+                        break;
+                    case "g":
+                        bubbles1(greens, "lastG", keyInput);
+                        break;
+                    case "y":
+                        bubbles1(yellows, "lastY", keyInput);
+                        break;
+                }
                 break;
-            case "r":
-                bubbles(reds, "lastR", keyInput);
-                break;
-            case "g":
-                bubbles(greens, "lastG", keyInput);
-                break;
-            case "y":
-                bubbles(yellows, "lastY", keyInput);
+            case 2:
+                //to do
                 break;
         }
+
 
     }
 }
 
-function bubbles(arr: Array, lastKey, keyInput: String) {
+function bubbles1(arr: Array, lastKey, keyInput: String) {
     if (arr.length > 0 && keyInput != lastKeys[lastKey]) {
         GameObject.Find(arr[0]).BroadcastMessage("addPoints");
         GameObject.Find(arr[0]).BroadcastMessage("popIt");
@@ -246,6 +242,14 @@ function bubbles(arr: Array, lastKey, keyInput: String) {
     } else {
         GameObject.Find("Lives").BroadcastMessage("loseLife");
     }
+}
+
+// function bubbles2(){
+//     for (var i; i<arr.length; i++){
+//         if (keyInput == i){
+
+//         }
+//     }
 }
 
 function gameOver() {
@@ -270,7 +274,6 @@ function gameOver() {
     yield WaitForSeconds(5 * Time.timeScale);
 
     if (Input.anyKeyDown || Time.time - GOTime > 15) {
-        //GameObject.Find("awwshucks(Clone)").BroadcastMessage("destroy");
         SceneManager.LoadScene('title_scene');
 
     }
