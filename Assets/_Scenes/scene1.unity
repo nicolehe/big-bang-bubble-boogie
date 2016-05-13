@@ -158,6 +158,7 @@ GameObject:
   - 222: {fileID: 112607343}
   - 114: {fileID: 112607342}
   - 95: {fileID: 112607345}
+  - 114: {fileID: 112607346}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -268,6 +269,20 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &112607346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 112607340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b1061002f02649ae9c1a6fa2a3ee446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgColor:
+    serializedVersion: 2
+    rgba: 4294967295
 --- !u!1 &118012249
 GameObject:
   m_ObjectHideFlags: 0
@@ -2471,11 +2486,13 @@ MonoBehaviour:
   claps: {fileID: 211709603}
   frowns: {fileID: 699230246}
   great: {fileID: 129952, guid: 188b7ccd396a24394b7c341800af9255, type: 2}
+  S2Start: {fileID: 168054, guid: 616f80868b00749c892d2893a8385372, type: 2}
   thresh2: 0
   thresh3: 0
   thresh4: 0
   thresh5: 0
   thresh6: 0
+  thresh7: 0
   highScore: 0
   l1Done: 0
   l2Done: 0
@@ -2483,7 +2500,9 @@ MonoBehaviour:
   l4Done: 0
   l5Done: 0
   l6Done: 0
+  l7Done: 0
   GO: 0
+  S2: 0
 --- !u!114 &2076580537
 MonoBehaviour:
   m_ObjectHideFlags: 0

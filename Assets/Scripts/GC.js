@@ -143,6 +143,10 @@ function Update() {
             bubbleTime = 0.6;
             music.pitch = 1.5;
             break;
+        case 7:
+            bubbleTime = 0.5;
+            music.pitch = 1.55;
+            break;
 
     }
 
@@ -299,6 +303,7 @@ function bubbles1(arr: Array, lastKey, keyInput: String) {
     //they lose a life
     } else {
         GameObject.Find("Lives").BroadcastMessage("loseLife");
+        GameObject.Find("Background").BroadcastMessage("changeBG");
     }
 }
 
@@ -338,6 +343,7 @@ function bubbles2(keyArr: Array, arr: Array, c: String, keyInput: String) {
     //they lose a life
     } else {
         GameObject.Find("Lives").BroadcastMessage("loseLife");
+        GameObject.Find("Background").BroadcastMessage("changeBG");
     }
 
     //if the user has cleared all the keys from the key array, reset the key array
@@ -423,4 +429,8 @@ function removeFromArray(myColor: String) {
             yellows.RemoveAt(0);
             break;
     }
+}
+
+function changeStage(thestage: int) {
+    stage = thestage;
 }
