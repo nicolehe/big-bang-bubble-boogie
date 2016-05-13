@@ -40,7 +40,8 @@ function Awake() {
 
 
 function Update() {
-
+    print("l1 " + l1Done);
+    print("l2" + l2Done);
     GameObject.Find("GameController").BroadcastMessage("keepScore", score);
     if (GO == false) {
         updateScore();
@@ -52,47 +53,25 @@ function Update() {
     }
     //print(Time.timeSinceLevelLoad);
     if (score < thresh2 && Time.timeSinceLevelLoad < 30) {
-        //print("level 1");
-        GameObject.Find("GameController").BroadcastMessage("currentLevel", 1);
-        GameObject.Find("LevelText").BroadcastMessage("currentLevel", 1);
-        GameObject.Find("SpaceMermaid").BroadcastMessage("currentLevel", 1);
-        GameObject.Find("Astrocrab").BroadcastMessage("currentLevel", 1);
+        print("level 1");
         l1Done = true;
+        broadcast(1);
     } else if (score >= thresh2 && l2Done == false || Time.timeSinceLevelLoad >= 60 && l2Done == false) {
-        //print("level 2");
-        GameObject.Find("GameController").BroadcastMessage("currentLevel", 2);
-        GameObject.Find("LevelText").BroadcastMessage("currentLevel", 2);
-        GameObject.Find("SpaceMermaid").BroadcastMessage("currentLevel", 2);
-        GameObject.Find("Astrocrab").BroadcastMessage("currentLevel", 2);
+        print("level 2");
         l2Done = true;
+        broadcast(2);
     } else if (score >= thresh3 && l3Done == false || Time.timeSinceLevelLoad >= 90 && l3Done == false) {
-        //print("level 3");
-        GameObject.Find("GameController").BroadcastMessage("currentLevel", 3);
-        GameObject.Find("LevelText").BroadcastMessage("currentLevel", 3);
-        GameObject.Find("SpaceMermaid").BroadcastMessage("currentLevel", 3);
-        GameObject.Find("Astrocrab").BroadcastMessage("currentLevel", 3);
-        l3Done = true;
+        print("level 3");
+        broadcast(3);
     } else if (score >= thresh4 && l4Done == false || Time.timeSinceLevelLoad >= 120 && l4Done == false ) {
-        //print("level 3");
-        GameObject.Find("GameController").BroadcastMessage("currentLevel", 4);
-        GameObject.Find("LevelText").BroadcastMessage("currentLevel", 4);
-        GameObject.Find("SpaceMermaid").BroadcastMessage("currentLevel", 4);
-        GameObject.Find("Astrocrab").BroadcastMessage("currentLevel", 4);
-        l4Done = true;
+        print("level 3");
+        broadcast(4);
     } else if (score >= thresh5 && l5Done == false || Time.timeSinceLevelLoad >= 150 && l5Done == false ) {
-        //print("level 3");
-        GameObject.Find("GameController").BroadcastMessage("currentLevel", 5);
-        GameObject.Find("LevelText").BroadcastMessage("currentLevel", 5);
-        GameObject.Find("SpaceMermaid").BroadcastMessage("currentLevel", 5);
-        GameObject.Find("Astrocrab").BroadcastMessage("currentLevel", 5);
-        l5Done = true;
+        print("level 3");
+        broadcast(5);
     } else if (score >= thresh6 && l6Done == false || Time.timeSinceLevelLoad >= 180 && l6Done == false ) {
-        //print("level 3");
-        GameObject.Find("GameController").BroadcastMessage("currentLevel", 6);
-        GameObject.Find("LevelText").BroadcastMessage("currentLevel", 6);
-        GameObject.Find("SpaceMermaid").BroadcastMessage("currentLevel", 6);
-        GameObject.Find("Astrocrab").BroadcastMessage("currentLevel", 6);
-        l6Done = true;
+        print("level 3");
+        broadcast(6);
     } else if (Time.timeSinceLevelLoad >= 175) {
         //GameObject.Find("GameController").BroadcastMessage("gameOver");
     }
@@ -100,6 +79,14 @@ function Update() {
 
 function updateScore() {
     text.text = "Score: " + score;
+}
+
+
+function broadcast(lvl) {
+        GameObject.Find("GameController").BroadcastMessage("currentLevel", lvl);
+        GameObject.Find("LevelText").BroadcastMessage("currentLevel", lvl);
+        GameObject.Find("SpaceMermaid").BroadcastMessage("currentLevel", lvl);
+        GameObject.Find("Astrocrab").BroadcastMessage("currentLevel", lvl);
 }
 
 

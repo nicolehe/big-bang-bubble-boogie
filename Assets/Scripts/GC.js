@@ -92,15 +92,15 @@ function Start() {
     whites = new Array();
 
     //the starting stage
-    stage = 2;
+    stage = 1;
 
 }
 
 function Update() {
-    print(reds2);
-    print(yellows2);
-    print(whites2);
-    print(greens2);
+    // print(reds2);
+    // print(yellows2);
+    // print(whites2);
+    // print(greens2);
 
     //if you beat the old high score, your new score is the high score
     if (thescore > highScore) {
