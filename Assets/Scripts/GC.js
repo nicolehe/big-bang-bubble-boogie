@@ -17,6 +17,8 @@ var GreenCircle: GameObject;
 var YellowCircle: GameObject;
 var WhiteCircle: GameObject;
 
+var repeatText: GameObject;
+
 var GOLowScore: GameObject;
 var GOHighScore: GameObject;
 
@@ -290,6 +292,7 @@ function bubbles1(arr: Array, lastKey, keyInput: String) {
     //tell the bubble to do the greyout animation
     } else if (arr.length > 0 && keyInput == lastKeys[lastKey]) {
         blip.Stop();
+        Instantiate(repeatText, Vector3(0, 0, -2), Quaternion.identity);
         GameObject.Find(arr[0]).BroadcastMessage("changeColor");
         blip.Play();
     //if the user hit a key but there are no bubbles of that color on the screen,
@@ -328,6 +331,7 @@ function bubbles2(keyArr: Array, arr: Array, c: String, keyInput: String) {
     //tell the bubble to do the greyout animation
     } else if (arr.length > 0 && remaining[c] == false) {
         blip.Stop();
+        Instantiate(repeatText, Vector3(0, 0, -2), Quaternion.identity);
         GameObject.Find(arr[0]).BroadcastMessage("changeColor");
         blip.Play();
     //if the user hit a key but there are no bubbles of that color on the screen,

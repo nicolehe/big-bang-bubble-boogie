@@ -1192,6 +1192,7 @@ MonoBehaviour:
   GreenCircle: {fileID: 161520, guid: 97662a8e3747c41f181fe621d68aaf95, type: 2}
   YellowCircle: {fileID: 196392, guid: e1c7d812692ea4eca918a7aadd201e12, type: 2}
   WhiteCircle: {fileID: 117946, guid: 43024f0ff0fa14e6eb1cbcec606303b0, type: 2}
+  repeatText: {fileID: 187132, guid: 54ae7f612404f403996e3490c73a2cfe, type: 2}
   GOLowScore: {fileID: 179098, guid: 58e4fee4a44324b72959b2c6b2fc5af7, type: 2}
   GOHighScore: {fileID: 170510, guid: 66f0d2d7a41fe4643b15b0720f984495, type: 2}
   canvasGroup: {fileID: 1163434284}
