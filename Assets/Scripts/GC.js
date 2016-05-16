@@ -283,12 +283,12 @@ function bubbles1(arr: Array, lastKey, keyInput: String) {
     //reduce timesFailed for audience,
     //set the lastKey to the last key pressed
     if (arr.length > 0 && keyInput != lastKeys[lastKey]) {
+        timesFailed--;
         GameObject.Find(arr[0]).BroadcastMessage("addPoints");
         GameObject.Find(arr[0]).BroadcastMessage("popIt");
         yield WaitForSeconds(0.05);
         GameObject.Find(arr[0]).BroadcastMessage("destroy");
         arr.RemoveAt(0);
-        timesFailed--;
         lastKeys[lastKey] = keyInput;
     //if there are bubbles of this color on the screen
     //but the key pressed is the same as the last key pressed of this color
@@ -325,12 +325,12 @@ function bubbles2(keyArr: Array, arr: Array, c: String, keyInput: String) {
     //then, remove that bubble name from the array of bubbles of that color that exist,
     //reduce timesFailed for audience,
     if (arr.length > 0 && remaining[c] == true) {
+        timesFailed--;
         GameObject.Find(arr[0]).BroadcastMessage("addPoints");
         GameObject.Find(arr[0]).BroadcastMessage("popIt");
         yield WaitForSeconds(0.05);
         GameObject.Find(arr[0]).BroadcastMessage("destroy");
         arr.RemoveAt(0);
-        timesFailed--;
     //if there are bubbles of this color that exist, but remaining for this color is false,
     //stop the blip sound if it's playing, and play it
     //tell the bubble to do the greyout animation

@@ -28,6 +28,7 @@ function Update() {
 	points = 200 / (y + 10);
 	if(y >= 6.2){
 		pop.Play();
+		GameObject.Find("Background").BroadcastMessage("changeBG");
 		GameObject.Find("Lives").BroadcastMessage("loseLife");
 		GameObject.Find("GameController").BroadcastMessage("audienceNeg");
 		GameObject.Find("GameController").BroadcastMessage("removeFromArray", myColor);

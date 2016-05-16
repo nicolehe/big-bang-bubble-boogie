@@ -283,6 +283,7 @@ MonoBehaviour:
   bgColor:
     serializedVersion: 2
     rgba: 4294967295
+  rg: 0
 --- !u!1 &118012249
 GameObject:
   m_ObjectHideFlags: 0
