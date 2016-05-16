@@ -62,7 +62,6 @@ function Update() {
     } else if (score >= thresh2 && l2Done == false || Time.timeSinceLevelLoad >= 60 && l2Done == false) {
         l2Done = true;
         broadcast(2);
-         startStage2();
     } else if (score >= thresh3 && l3Done == false || Time.timeSinceLevelLoad >= 90 && l3Done == false) {
         l3Done = true;
         broadcast(3);
@@ -71,6 +70,7 @@ function Update() {
         broadcast(4);
     } else if (score >= thresh5 && l5Done == false || Time.timeSinceLevelLoad >= 150 && l5Done == false) {
         l5Done = true;
+        startStage2();
         broadcast(5);
     } else if (score >= thresh6 && l6Done == false || Time.timeSinceLevelLoad >= 180 && l6Done == false) {
         l6Done = true;
