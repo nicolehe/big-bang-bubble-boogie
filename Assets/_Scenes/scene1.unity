@@ -1204,6 +1204,7 @@ MonoBehaviour:
   keyCode: 0
   score: 0
   thescore: 0
+  pause: 0
   RedCircle: {fileID: 145288, guid: f6787ed8acf4841989b36c15a3e461f2, type: 2}
   GreenCircle: {fileID: 161520, guid: 97662a8e3747c41f181fe621d68aaf95, type: 2}
   YellowCircle: {fileID: 196392, guid: e1c7d812692ea4eca918a7aadd201e12, type: 2}

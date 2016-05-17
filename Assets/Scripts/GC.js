@@ -98,10 +98,10 @@ function Start() {
 }
 
 function Update() {
-    // print(reds2);
-    // print(yellows2);
-    // print(whites2);
-    // print(greens2);
+    print(reds2);
+    print(greens2);
+    print(whites2);
+    print(yellows2);
 
     //if you beat the old high score, your new score is the high score
     if (thescore > highScore) {
