@@ -10,6 +10,7 @@ var highScore: int;
 var keyCode: KeyCode;
 var score: int;
 var thescore: int;
+var pause = false;
 
 
 var RedCircle: GameObject;
@@ -114,7 +115,7 @@ function Update() {
     }
 
     //if the game has not yet ended, check for key presses
-    if (GO == false) {
+    if (GO == false && pause == false) {
         keyCheck();
     }
 
@@ -216,6 +217,13 @@ function audienceNeg() {
     timesFailed++;
 }
 
+function startPause() {
+    pause = true;
+}
+
+function endPause() {
+    pause = false;
+}
 
 //called if user(s) press a button while circles are on screen
 function keyCheck() {

@@ -96,7 +96,7 @@ function broadcast(lvl) {
 
 function startStage2() {
     var finishStage1Time: float;
-
+    GameObject.Find("GameController").BroadcastMessage("startPause");
     //the GO boolean is to make sure this following code only happens once:
     if (S2 == false) {
         finishStage1Time = Time.time;
@@ -107,7 +107,7 @@ function startStage2() {
     //make the timescale very small so that it appears frozen, but we can still use Time
     Time.timeScale = 0.0001;
     yield WaitForSeconds(5 * Time.timeScale);
-
+    GameObject.Find("GameController").BroadcastMessage("endPause");
     GameObject.Find("stage2start(Clone)").BroadcastMessage("destroy");
     GameObject.Find("GameController").BroadcastMessage("changeStage", 2);
     Time.timeScale = 1;
